@@ -4,11 +4,11 @@ using namespace std;
 
 void clear(string system_name)
 {
-    if (system_name == win)
+    if (system_name == "win")
     {
         system("cls");
     }
-    else if (system_name == linux)
+    else if (system_name == "linux")
     {
         system("clear");
     }
