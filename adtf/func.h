@@ -67,6 +67,7 @@ int findUserIndex(User*& arr, int& size, string username, string password, int l
 
 void press_to_continue()
 {
+	cout << endl;
 	int a;
 	cout << "Press any key to continue....";
 	cin >> a;

@@ -9,60 +9,60 @@ using namespace std;
 
 void banner()
 {
-    cout << "			         ______              ________                  				" << endl;
-    cout << "			        / ____/__    __     / ____/ /_  ___  __________				" << endl;
-    cout << "			       / /  __/ /___/ /_   / /   / __ // _ // ___/ ___/				" << endl;
-    cout << "			      / /__/_  __/_  __/  / /___/ / / /  __(__  |__  ) 				" << endl;
-    cout << "			      /____//_/   /_/     /____/_/ /_//___/____/____/  				" << endl;
-    cout << "                                            by suleymanovdev.  			    " << endl;
+    cout << "	   ______              ________                  				" << endl;
+    cout << "	  / ____/__    __     / ____/ /_  ___  __________				" << endl;
+    cout << "	 / /  __/ /___/ /_   / /   / __ // _ // ___/ ___/				" << endl;
+    cout << "	/ /__/_  __/_  __/  / /___/ / / /  __(__  |__  ) 				" << endl;
+    cout << "	/____//_/   /_/     /____/_/ /_//___/____/____/  				" << endl;
+    cout << "                                            by suleymanovdev.  	" << endl;
 }
 
 void welcome()
 {
 	cout << endl;
-	cout << "								1. Reg / Log In.								" << endl; // reg_and_login();
+	cout << "			1. Reg / Log In.								" << endl; // reg_and_login();
 	cout << endl;
-	cout << "								2. Board.										" << endl; // boardinfo();
+	cout << "			2. Board.										" << endl; // boardinfo();
 	cout << endl;
-	cout << "								3. About.										" << endl; // about();
+	cout << "			3. About.										" << endl; // about();
 	cout << endl;
-	cout << "								4. License.										" << endl; // license();
+	cout << "			4. License.										" << endl; // license();
 	cout << endl;
-	cout << "								5. Exit.										" << endl; // exit(0);
+	cout << "			5. Exit.										" << endl; // exit(0);
 }
 
 void reg_and_login()
 {
 	cout << endl;
-	cout << "								1. Registration.								" << endl;
+	cout << "			1. Registration.								" << endl;
 	cout << endl;
-	cout << "                               2. Log In.										" << endl;
+	cout << "           		2. Log In.								" << endl;
 	cout << endl;
-	cout << "								3. Log In as Guest. (Beta)						" << endl;
+	cout << "			3. Log In as Guest. (Beta)						" << endl;
 	cout << endl;
-	cout << "								4. Back to menu.								" << endl;
+	cout << "			4. Back to menu.								" << endl;
 }
 
 void boardinfo()
 {
-	cout << "					   a     b     c     d     e     f     g     h   		" << endl;
-	cout << "					|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "				 1	| b_r | b_h | b_o | b_Q | b_K | b_o | b_h | b_r |		" << endl;
-	cout << "				  	|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "				 2	| b_p | b_p | b_p | b_p | b_p | b_p | b_p | b_p |		" << endl;
-	cout << "					|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "				 3	|     |     |     |     |     |     |     |     |		" << endl;
-	cout << "					|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "				 4	|     |     |     |     |     |     |     |     |		" << endl;
-	cout << "					|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "				 5	|     |     |     |     |     |     |     |     |		" << endl;
-	cout << "					|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "				 6	|     |     |     |     |     |     |     |     |		" << endl;
-	cout << "					|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "				 7	| w_p | w_p | w_p | w_p | w_p | w_p | w_p | w_p |		" << endl;
-	cout << "					|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "				 8	| w_r | w_h | w_o | w_Q | w_K | w_o | w_h | w_r |		" << endl;
-	cout << "					|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "		   a     b     c     d     e     f     g     h   		" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "	1	| b_r | b_h | b_o | b_Q | b_K | b_o | b_h | b_r |		" << endl;
+	cout << "	 	|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "	2	| b_p | b_p | b_p | b_p | b_p | b_p | b_p | b_p |		" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "	3	|     |     |     |     |     |     |     |     |		" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "	4	|     |     |     |     |     |     |     |     |		" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "	5	|     |     |     |     |     |     |     |     |		" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "	6	|     |     |     |     |     |     |     |     |		" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "	7	| w_p | w_p | w_p | w_p | w_p | w_p | w_p | w_p |		" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "	8	| w_r | w_h | w_o | w_Q | w_K | w_o | w_h | w_r |		" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
 }
 
 void about()
