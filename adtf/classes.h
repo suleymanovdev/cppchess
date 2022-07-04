@@ -8,11 +8,44 @@ using namespace std;
 
 class User
 {
-    string username;
+    string username; 
     string password;
-    string level;
+    int level;
 public:
+	User()
+	{
+		level = 0;
+	}
 
+	void set_username(string username)
+	{
+		this->username = username;
+	}
+
+	void set_password(string password)
+	{
+		this->password = password;
+	}
+
+	void set_level(int level)
+	{
+		this->level = level;
+	}
+
+	string get_username()
+	{
+		return username;
+	}
+
+	string get_password()
+	{
+		return password;
+	}
+
+	int get_level()
+	{
+		return level;
+	}
 };
 
 class Figure
@@ -30,6 +63,11 @@ public:
     {
         this->weight = weight;
     }
+};
+
+class Pawn : Figure
+{
+
 };
 
 class Rook : Figure
