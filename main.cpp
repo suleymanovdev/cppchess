@@ -16,7 +16,7 @@ int main()
 	int choose = 0;
 	string sys_name;
 
-	cout << "Enter system name:~> " << endl;
+	cout << "Enter system name:~> ";
 	cin >> sys_name;
 	clear(sys_name);
 
@@ -25,13 +25,35 @@ int main()
 		clear(sys_name);
 		banner();
 		welcome();
+		cout << endl;
+		cout << "	Enter your choose:~> ";
 		cin >> choose;
 		switch (choose)
 		{
 		case 1:
+			int choose_reg;
 			clear(sys_name);
 			banner();
 			reg_and_login();
+			/*
+                    1. Registration.
+					2. Log In.
+					3. Log In as Guest. (Beta)
+					4. Back to menu.
+			*/
+			// cout << "	Enter your choose:~> ";
+			// cin >> choose_reg;
+			// switch (choose_reg)
+			// {
+			// case 1:
+			// 	string username = "sudev";
+			// 	string password = "passtest45";
+			// 	int level = 1045;
+			// 	addNewUser(user_arr, user_arr_size, username, password, level);
+			// 	cout << user_arr[1].get_username();
+			// 	press_to_continue();
+			// 	break;
+			// }
 			break;
 		case 2:
 			clear(sys_name);
