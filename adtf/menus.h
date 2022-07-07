@@ -34,13 +34,11 @@ void welcome()
 void reg_and_login()
 {
 	cout << endl;
-	cout << "			1. Registration.								" << endl;
+	cout << "			1. REGISTRATION.								" << endl;
 	cout << endl;
-	cout << "           		2. Log In.								" << endl;
+	cout << "			2. Log In as Guest. (Beta)						" << endl;
 	cout << endl;
-	cout << "			3. Log In as Guest. (Beta)						" << endl;
-	cout << endl;
-	cout << "			4. Back to menu.								" << endl;
+	cout << "			3. Back to menu.								" << endl;
 }
 
 void boardinfo()
