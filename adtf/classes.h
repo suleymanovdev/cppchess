@@ -46,11 +46,20 @@ public:
 	{
 		return level;
 	}
+
+	void inf0()
+	{
+		cout << "USER PROFILE (INFO)" << endl;
+		cout << "USERNAME: " << this->username << endl;
+		cout << "PASSWORD: " << this->password << endl;
+		cout << "LEVEL: " << this->level << endl;
+	}
 };
 
 class Figure
 {
 private:
+    string name;
     string color;
     int weight;
 public:
