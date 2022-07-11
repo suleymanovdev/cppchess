@@ -17,18 +17,18 @@ int main()
     int level;
 
     /*
-  		Settings.
-  	*/
-  
-  	int choose = 0;
-  	string sys_name;
+      Settings.
+    */
 
-  	cout << "Enter system name:~> ";
-  	cin >> sys_name;
-  	clear(sys_name);
+    int choose = 0;
+    string sys_name;
+
+    cout << "Enter system name:~> ";
+    cin >> sys_name;
+    clear(sys_name);
 
     while (true)
-	{
+    {
   		clear(sys_name);
   		banner();
   		welcome();
