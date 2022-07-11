@@ -72,34 +72,52 @@ public:
     {
         this->weight = weight;
     }
+
+	virtual void turn() = 0; 
 };
 
-class Pawn : Figure
+class Pawn : public Figure
 {
-
-};
-
-class Rook : Figure
-{
-    
-};
-
-class Horse : Figure
-{
+private:
 
 };
 
-class Officer : Figure
+class Rook : public Figure
 {
+private:
+
+public:
 
 };
 
-class Queen : Figure
+class Horse : public Figure
 {
+private:
+
+public:
 
 };
 
-class King : Figure
+class Officer : public Figure
 {
+private:
+
+public:
+
+};
+
+class Queen : public Figure
+{
+private:
+
+public:
+
+};
+
+class King : public Figure
+{
+private:
+
+public:
 
 };
