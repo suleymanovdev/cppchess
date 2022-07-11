@@ -72,8 +72,6 @@ void press_to_continue()
 	cout << "Press any key to continue....";
 	cin >> a;
 }
-<<<<<<< Updated upstream
-=======
 
 void board_print(int board[])
 {
@@ -96,4 +94,3 @@ void board_print(int board[])
 	cout << "	8	| w_r | w_h | w_o | w_Q | w_K | w_o | w_h | w_r |		" << endl;
 	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
 }
->>>>>>> Stashed changes
