@@ -117,7 +117,7 @@ public:
 
 };
 
-class Officer : public Figure
+class Elephant : public Figure
 {
 private:
 

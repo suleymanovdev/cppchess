@@ -43,24 +43,24 @@ void reg_and_login()
 
 void boardinfo()
 {
-	cout << "		   a     b     c     d     e     f     g     h   		" << endl;
-	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "	1	| b_r | b_h | b_o | b_Q | b_K | b_o | b_h | b_r |		" << endl;
-	cout << "	 	|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "	2	| b_p | b_p | b_p | b_p | b_p | b_p | b_p | b_p |		" << endl;
-	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "	3	|     |     |     |     |     |     |     |     |		" << endl;
-	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "	4	|     |     |     |     |     |     |     |     |		" << endl;
-	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "	5	|     |     |     |     |     |     |     |     |		" << endl;
-	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "	6	|     |     |     |     |     |     |     |     |		" << endl;
-	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "	7	| w_p | w_p | w_p | w_p | w_p | w_p | w_p | w_p |		" << endl;
-	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
-	cout << "	8	| w_r | w_h | w_o | w_Q | w_K | w_o | w_h | w_r |		" << endl;
-	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		" << endl;
+	cout << "		   a     b     c     d     e     f     g     h   		                " << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|		                " << endl;
+	cout << "	1	| b_r | b_h | b_e | b_Q | b_K | b_e | b_h | b_r |	<-- Main Figures.	" << endl;
+	cout << "	 	|-----|-----|-----|-----|-----|-----|-----|-----|	                	" << endl;
+	cout << "	2	| b_p | b_p | b_p | b_p | b_p | b_p | b_p | b_p |	<-- Pawns.      	" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|	                	" << endl;
+	cout << "	3	|     |     |     |     |     |     |     |     |	                	" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|	                	" << endl;
+	cout << "	4	|     |     |     |     |     |     |     |     |	                	" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|	<-- Board Middle. 	" << endl;
+	cout << "	5	|     |     |     |     |     |     |     |     |	                	" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|	                	" << endl;
+	cout << "	6	|     |     |     |     |     |     |     |     |	                	" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|	                	" << endl;
+	cout << "	7	| w_p | w_p | w_p | w_p | w_p | w_p | w_p | w_p |	<-- Pawns.      	" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|	                	" << endl;
+	cout << "	8	| w_r | w_h | w_e | w_Q | w_K | w_e | w_h | w_r |	<-- Main Figures.	" << endl;
+	cout << "		|-----|-----|-----|-----|-----|-----|-----|-----|	                	" << endl;
 }
 
 void about()
@@ -95,4 +95,9 @@ void license()
 	cout << "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM," << endl;
 	cout << "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE" << endl;
 	cout << "SOFTWARE." << endl;
+}
+
+void error()
+{
+    cout << "If you have any problems or difficulties with the program, then write about it in a special discussion chat that is located inside the repository of this project. link: https://github.com/suleymanovdev/cppchess/discussions/categories/errors" << endl;
 }
