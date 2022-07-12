@@ -62,6 +62,8 @@ private:
     string name;
     string color;
     int weight;
+    int start_position_x;
+    int start_position_y;
 public:
     void set_color(string color)
     {
@@ -102,7 +104,7 @@ public:
 class Rook : public Figure
 {
 private:
-
+    
 public:
 
 };
