@@ -6,7 +6,10 @@ using namespace std;
 	This is .h file for project functions.
 */
 
-void clear(string system_name) // Terminal clear command.
+/*
+    Terminal clear command.
+*/
+void clear(string system_name)
 {
     if (system_name == "win")
     {
@@ -22,6 +25,9 @@ void clear(string system_name) // Terminal clear command.
     }
 }
 
+/*
+    Press to continue command.
+*/
 void press_to_continue()
 {
     cout << endl;

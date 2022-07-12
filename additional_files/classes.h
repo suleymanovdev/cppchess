@@ -11,9 +11,11 @@ class User
     string username; 
     string password;
     int level;
+    bool regbool;
 public:
 	User()
 	{
+        regbool = false;
 		level = 0;
 	}
 
@@ -32,6 +34,11 @@ public:
 		this->level = level;
 	}
 
+    void set_regbool(bool regbool)
+    {
+        this->regbool = regbool;
+    }
+
 	string get_username()
 	{
 		return username;
@@ -46,6 +53,11 @@ public:
 	{
 		return level;
 	}
+
+    bool get_regbool()
+    {
+        return regbool;
+    }
 
 	void inf0()
 	{
