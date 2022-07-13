@@ -1,28 +1,68 @@
+/*
+MIT License
+
+Copyright (c) 2022 Elvin Suleymanov
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include <iostream>
 #include <string>
-#include "additional_files/classes.h"
+#include "additional_files/user.h"
+#include "additional_files/figure.h"
 #include "additional_files/menus.h"
 #include "additional_files/functions.h"
+#include "additional_files/figures/pawn.h"
+#include "additional_files/figures/horse.h"
+#include "additional_files/figures/elephant.h"
+#include "additional_files/figures/rook.h"
+#include "additional_files/figures/queen.h"
+#include "additional_files/figures/king.h"
 using namespace std;
 
 int main()
 {
     string sys; // Your System Name
     
+	// Creating figures(objects)
+
+	Pawn w_p1, w_p2, w_p3, w_p4, w_p5, w_p6, w_p7, w_p8, b_p1, b_p2, b_p3, b_p4, b_p5, b_p6, b_p7, b_p8;
+	Horse w_h1, w_h2, b_h1, b_h2;
+	Elephant w_e1, w_e2, b_e1, b_e2;
+	Rook w_r1, w_r2, b_r1, b_r2;
+	Queen w_Q, b_Q;
+	King w_K, b_K;
+
     // Creating arrays
     // 1. Board with figures
     // 2. White killed figures
     // 3. Black killed figures
     
     Figure** board_arr[8][8] = {
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
+        {*b_r1, *b_h1, *b_e1, *b_Q, *b_K, *b_e2, *b_h2, *b_r2},
+        {*b_p1, *b_p2, *b_p3, *b_p4, *b_p5, *b_p6, *b_p7, *b_p8},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {*w_p1, *w_p2, *w_p3, *w_p4, *w_p5, *w_p6, *w_p7, *w_p8},
+        {*w_r1, *w_h1, *w_e1, *w_Q, *w_K, *w_e2, *w_h2, *w_r2},
     };
 
     Figure* killed_white_figures_arr[15] = {};
