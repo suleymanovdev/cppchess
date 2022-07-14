@@ -25,8 +25,9 @@ SOFTWARE.
 #include <iostream>
 #include <string>
 #include "additional_files/user.h"
-#include "additional_files/figure.h"
+#include "additional_files/figures/main_figure/figure.h"
 #include "additional_files/menus.h"
+#include "additional_files/board.h"
 #include "additional_files/functions.h"
 #include "additional_files/figures/pawn.h"
 #include "additional_files/figures/horse.h"
@@ -49,20 +50,63 @@ int main()
 	Queen w_Q, b_Q;
 	King w_K, b_K;
 
+    // Setting all settings on figures
+
+    w_p1.set_name("w_p");w_p1.set_color("white");w_p1.set_weight(1); // White Pawn #1
+    w_p2.set_name("w_p");w_p2.set_color("white");w_p2.set_weight(1); // White Pawn #2
+    w_p3.set_name("w_p");w_p3.set_color("white");w_p3.set_weight(1); // White Pawn #3
+    w_p4.set_name("w_p");w_p4.set_color("white");w_p4.set_weight(1); // White Pawn #4
+    w_p5.set_name("w_p");w_p5.set_color("white");w_p5.set_weight(1); // White Pawn #5
+    w_p6.set_name("w_p");w_p6.set_color("white");w_p6.set_weight(1); // White Pawn #6
+    w_p7.set_name("w_p");w_p7.set_color("white");w_p7.set_weight(1); // White Pawn #7
+    w_p8.set_name("w_p");w_p8.set_color("white");w_p8.set_weight(1); // White Pawn #8
+    //===============================================================================
+    b_p1.set_name("b_p");b_p1.set_color("black");b_p1.set_weight(1); // Black Pawn #1
+    b_p2.set_name("b_p");b_p2.set_color("black");b_p2.set_weight(1); // Black Pawn #2
+    b_p3.set_name("b_p");b_p3.set_color("black");b_p3.set_weight(1); // Black Pawn #3
+    b_p4.set_name("b_p");b_p4.set_color("black");b_p4.set_weight(1); // Black Pawn #4
+    b_p5.set_name("b_p");b_p5.set_color("black");b_p5.set_weight(1); // Black Pawn #5
+    b_p6.set_name("b_p");b_p6.set_color("black");b_p6.set_weight(1); // Black Pawn #6
+    b_p7.set_name("b_p");b_p7.set_color("black");b_p7.set_weight(1); // Black Pawn #7
+    b_p8.set_name("b_p");b_p8.set_color("black");b_p8.set_weight(1); // Black Pawn #8
+    //===============================================================================
+    w_h1.set_name("w_h");w_h1.set_color("white");w_h1.set_weight(3); // White Horse #1
+    w_h2.set_name("w_h");w_h2.set_color("white");w_h2.set_weight(3); // White Horse #2
+    //===============================================================================
+    b_h1.set_name("b_h");b_h1.set_color("black");b_h1.set_weight(3); // Black Horse #1
+    b_h2.set_name("b_h");b_h2.set_color("black");b_h2.set_weight(3); // Black Horse #2
+    //===============================================================================
+    w_e1.set_name("w_e");w_e1.set_color("white");w_e1.set_weight(3); // White Elephant #1
+    w_e2.set_name("w_e");w_e2.set_color("white");w_e2.set_weight(3); // White Elephant #2
+    //===============================================================================
+    b_e1.set_name("b_e");b_e1.set_color("black");b_e1.set_weight(3); // Black Elephant #1
+    b_e2.set_name("b_e");b_e2.set_color("black");b_e2.set_weight(3); // Black Elephant #2
+    //===============================================================================
+    w_r1.set_name("w_r");w_r1.set_color("white");w_r1.set_weight(5); // White Rook #1
+    w_r2.set_name("w_r");w_r2.set_color("white");w_r2.set_weight(5); // White Rook #2
+    //===============================================================================
+    b_r1.set_name("b_r");b_r1.set_color("black");b_r1.set_weight(5); // Black Rook #1
+    b_r2.set_name("b_r");b_r2.set_color("black");b_r2.set_weight(5); // Black Rook #2
+    //===============================================================================
+    w_Q.set_name("w_Q");w_Q.set_color("white");w_Q.set_weight(9); // White Queen
+    b_Q.set_name("b_Q");b_Q.set_color("black");b_Q.set_weight(9); // Black Queen
+    w_K.set_name("w_K");w_K.set_color("white");w_K.set_weight(0); // White King
+    b_K.set_name("b_K");b_K.set_color("black");b_K.set_weight(0); // Black King
+    
     // Creating arrays
     // 1. Board with figures
     // 2. White killed figures
     // 3. Black killed figures
-    
-    Figure** board_arr[8][8] = {
-        {*b_r1, *b_h1, *b_e1, *b_Q, *b_K, *b_e2, *b_h2, *b_r2},
-        {*b_p1, *b_p2, *b_p3, *b_p4, *b_p5, *b_p6, *b_p7, *b_p8},
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-        {*w_p1, *w_p2, *w_p3, *w_p4, *w_p5, *w_p6, *w_p7, *w_p8},
-        {*w_r1, *w_h1, *w_e1, *w_Q, *w_K, *w_e2, *w_h2, *w_r2},
+    // nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+    Figure* board_arr[8][8] = {
+        {&b_r1, &b_h1, &b_e1, &b_Q, &b_K, &b_e2, &b_h2, &b_r2},
+        {&b_p1, &b_p2, &b_p3, &b_p4, &b_p5, &b_p6, &b_p7, &b_p8},
+        {},
+        {},
+        {},
+        {},
+        {&w_p1, &w_p2, &w_p3, &w_p4, &w_p5, &w_p6, &w_p7, &w_p8},
+        {&w_r1, &w_h1, &w_e1, &w_Q, &w_K, &w_e2, &w_h2, &w_r2},
     };
 
     Figure* killed_white_figures_arr[15] = {};
@@ -159,7 +203,8 @@ int main()
             else if (welcome_choose == 2)
             {
                 clear(sys);
-                boardinfo();
+                //test: cout << board_arr[1][1]->get_name();
+                board_print(*board_arr);
                 press_to_continue();
             }
                 
