@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "additional_files/figure.h"
+// #include "main_figure/figure.h"
 using namespace std;
 
 class King : public Figure
@@ -12,7 +12,7 @@ private:
 	int x;
 	int y;
 public:
-    Pawn()
+    King()
 	{
 		start_x = 0;
 		start_y = 0;

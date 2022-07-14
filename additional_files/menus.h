@@ -39,6 +39,7 @@ void menu()
     cout << "      ---================MENU================---           " << endl;
     cout << endl;
 	cout << "			1. Profile.								        " << endl; // profile();
+    cout << endl;
 	cout << "			2. Play.										" << endl; // In process.
 	cout << endl;
 	cout << "			3. Play with c0mputer. (BETA)					" << endl; // In process.

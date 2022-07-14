@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "additional_files/figure.h"
+// #include "main_figure/figure.h"
 using namespace std;
 
 class Pawn : public Figure

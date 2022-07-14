@@ -12,8 +12,6 @@ private:
     string name;
     string color;
     int weight;
-    int start_position_x;
-    int start_position_y;
 public:
     void set_color(string color)
     {
@@ -23,6 +21,11 @@ public:
     void set_weight(int weight)
     {
         this->weight = weight;
+    }
+
+    void set_name(string name)
+    {
+        this->name = name;
     }
 
     string get_name()
@@ -39,6 +42,4 @@ public:
     {
         return this->weight;
     }
-
-	virtual void turn() = 0; 
 };
