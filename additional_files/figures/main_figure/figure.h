@@ -11,7 +11,7 @@ class Figure
 private:
     string name;
     string color;
-    int weight;
+    int weight = 0;
 public:
     void set_color(string color)
     {
