@@ -27,7 +27,6 @@ SOFTWARE.
 #include "additional_files/user.h"
 #include "additional_files/figures/main_figure/figure.h"
 #include "additional_files/menus.h"
-#include "additional_files/board.h"
 #include "additional_files/functions.h"
 #include "additional_files/figures/pawn.h"
 #include "additional_files/figures/horse.h"
@@ -204,7 +203,13 @@ int main()
             {
                 clear(sys);
                 //test: cout << board_arr[1][1]->get_name();
-                board_print(*board_arr);
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        cout << " | " << board_arr[i][j]->get_name() << " | "<< endl;
+                    }
+                }
                 press_to_continue();
             }
                 
@@ -276,7 +281,7 @@ int main()
 
                 else if (profile_choose == 2)
                 {
-                    string temp_password = 0;
+                    string temp_password = "0";
                     cout << "Please enter user password:~> ";
                     cin >> temp_password;
                         
@@ -296,7 +301,7 @@ int main()
 
                 else if (profile_choose == 3)
                 {
-                    string temp_password = 0;
+                    string temp_password = "0";
                     cout << "Please enter user password:~> ";
                     cin >> temp_password;
                         
