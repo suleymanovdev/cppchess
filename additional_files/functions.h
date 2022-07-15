@@ -35,3 +35,8 @@ void press_to_continue()
     int a;
     cin >> a;
 }
+
+void go_function(Figure* obj, char arr[])
+{
+	
+}

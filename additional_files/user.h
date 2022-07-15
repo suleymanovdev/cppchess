@@ -6,6 +6,12 @@ using namespace std;
 	This is .h file with user classe settings.
 */
 
+enum Player
+{
+	WHITE, // 0
+	BLACK  // 1
+};
+
 class User
 {
     string username; 
