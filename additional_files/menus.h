@@ -22,15 +22,15 @@ void welcome()
     cout << endl;
     cout << "      ---==============WELCOME===============---           " << endl;
 	cout << endl;
-	cout << "			1. Reg / Log In.								" << endl; // reg_and_login();
-	cout << endl;
-	cout << "			2. Board.										" << endl; // boardinfo();
-	cout << endl;
-	cout << "			3. About.										" << endl; // about();
-	cout << endl;
-	cout << "			4. License.										" << endl; // license();
-	cout << endl;
-	cout << "			5. Exit.										" << endl; // exit(0);
+	cout << "		1. Reg / Log In.								" << endl; // reg_and_login();
+    cout << endl;
+	cout << "		2. Board.										" << endl; // boardinfo();
+    cout << endl;
+	cout << "		3. About.										" << endl; // about();
+    cout << endl;
+	cout << "		4. License.										" << endl; // license();
+    cout << endl;
+	cout << "		5. Exit.										" << endl; // exit(0);
 }
 
 void menu()
@@ -38,19 +38,19 @@ void menu()
     cout << endl;
     cout << "      ---================MENU================---           " << endl;
     cout << endl;
-	cout << "			1. Profile.								        " << endl; // profile();
+	cout << "		1. Profile.										" << endl; // profile();
     cout << endl;
-	cout << "			2. Play.										" << endl; // In process.
-	cout << endl;
-	cout << "			3. Play with c0mputer. (BETA)					" << endl; // In process.
-	cout << endl;
-	cout << "			4. Log Out.										" << endl; // user.set_regbool(false);
+	cout << "		2. Play.										" << endl; // In process.
     cout << endl;
-    cout << "			5. About.										" << endl; // about();
+	cout << "		3. Play with c0mputer. (BETA)					" << endl; // In process.
+    cout << endl;
+	cout << "		4. Log Out.										" << endl; // user.set_regbool(false);
+    cout << endl;
+	cout << "		5. About.										" << endl; // about();
+    cout << endl;
+	cout << "		6. License.										" << endl; // license();
 	cout << endl;
-	cout << "			6. License.										" << endl; // license();
-	cout << endl;
-	cout << "			7. Exit.										" << endl; // exit(0);
+	cout << "		7. Exit.										" << endl; // exit(0);
 }
 
 void profile(User& user)
@@ -62,13 +62,14 @@ void profile(User& user)
     cout << "          PASSWORD: " << user.get_password()                 << endl;
     cout << "          LEVEL: " << user.get_level()                       << endl;
 
-	cout << "			1. Change username.								" << endl; // Checking with changing.
+	cout << endl;
+	cout << "		1. Change username.								" << endl; // Checking with changing.
     cout << endl;
-	cout << "			2. Change password.								" << endl; // Checking with changing.
+	cout << "		2. Change password.								" << endl; // Checking with changing.
     cout << endl;
-	cout << "			3. Change level.								" << endl; // Checking with changing.
+	cout << "		3. Change level.								" << endl; // Checking with changing.
     cout << endl;
-	cout << "			4. Back.							        	" << endl; // continue;
+	cout << "		4. Back.							        	" << endl; // continue;
 }
 
 void reg_and_login()
@@ -76,11 +77,11 @@ void reg_and_login()
     cout << endl;
     cout << "      ---============REGISTRATION============---           " << endl;
 	cout << endl;
-	cout << "			1. REGISTRATION.								" << endl;
-	cout << endl;
-	cout << "			2. Log In as Guest. (BETA)						" << endl;
-	cout << endl;
-	cout << "			3. Back to menu.								" << endl;
+	cout << "		1. REGISTRATION.								" << endl;
+    cout << endl;
+	cout << "		2. Log In as Guest. (BETA)						" << endl;
+    cout << endl;
+	cout << "		3. Back to menu.								" << endl;
 }
 
 void boardinfo()

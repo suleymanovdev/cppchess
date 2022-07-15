@@ -36,7 +36,31 @@ void press_to_continue()
     cin >> a;
 }
 
-void go_function(Figure* obj, char arr[])
-{
+// void go(Figure* obj, char coor[])
+// {
 	
+// }
+
+/*
+	Board letter to int.
+*/
+void lti(char coor[])
+{
+	for (int i = 97; i < 105; i++)
+	{
+		if (coor[0] == char(i))
+		{
+			coor[0] = char(i - 49);
+		}
+		if (coor[2] == char(i))
+		{
+			coor[2] = char(i - 49);
+		}
+	}
+}
+
+void func(char coor[], Figure** board_arr)
+{
+	board_arr[(int(coor[3]) - 97)][(int(coor[2]) - 97)] = board_arr[(int(coor[1]) - 97)][(int(coor[0]) - 97)];
+	board_arr[(int(coor[1]) - 97)][(int(coor[0]) - 97)] = nullptr;
 }

@@ -43,5 +43,12 @@ public:
         return this->weight;
     }
 
-	virtual void go_function(int xcoordinate, int ycoordinate) = 0;
+    Figure operator =()
+    {
+
+    }
+
+    //konstr kop
+
+	virtual void go_function(char coor[]) = 0;
 };

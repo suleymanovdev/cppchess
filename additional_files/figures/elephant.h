@@ -38,7 +38,7 @@ public:
 		return y;
 	}
 
-	void go_function(int xcoordinate, int ycoordinate) override
+	void go_function(char coor[]) override
 	{
 		
 	}
