@@ -25,6 +25,7 @@ SOFTWARE.
 #include <iostream>
 #include <string>
 #include "additional_files/user.h"
+#include "additional_files/board.h"
 #include "additional_files/figures/main_figure/figure.h"
 #include "additional_files/menus.h"
 #include "additional_files/functions.h"
@@ -50,7 +51,6 @@ int main()
 	King w_K, b_K;
 
     // Setting all settings on figures
-
     w_p1.set_name("w_p");w_p1.set_color("white");w_p1.set_weight(1); // White Pawn #1
     w_p2.set_name("w_p");w_p2.set_color("white");w_p2.set_weight(1); // White Pawn #2
     w_p3.set_name("w_p");w_p3.set_color("white");w_p3.set_weight(1); // White Pawn #3
@@ -96,7 +96,7 @@ int main()
     // 1. Board with figures
     // 2. White killed figures
     // 3. Black killed figures
-    // nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+
     Figure* board_arr[8][8] = {
         {&b_r1, &b_h1, &b_e1, &b_Q, &b_K, &b_e2, &b_h2, &b_r2},
         {&b_p1, &b_p2, &b_p3, &b_p4, &b_p5, &b_p6, &b_p7, &b_p8},
@@ -117,9 +117,17 @@ int main()
     string pass = " ";
     int lvl = 0;
 
+	// Data for players
+	int white_player = 0;
+	int black_player = 0;
+
     // Data for cycle
     int welcome_choose = 0;
     int menu_choose = 0;
+	bool game_started = true;
+	string x_coor = " ";
+	string y_coor = " ";
+	char coor[4] = {};
 
     // Entering system name
     cout << "Ou. Hello! Enter your system name:~> ";
@@ -205,16 +213,32 @@ int main()
                 //test: cout << board_arr[1][1]->get_name();
                 for (int i = 0; i < 8; i++)
                 {
+					cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
                     for (int j = 0; j < 8; j++)
                     {
+						if (j == 0)
+						{
+							cout << i + 1 << " ";
+						}
                         if (board_arr[i][j] == nullptr)
                         {
-                            cout << " |     | " << endl;
+                            cout << "|     ";
+							if (j == 7)
+							{
+								cout << "|";
+							}
                             continue;
                         }
-                        cout << " | " << board_arr[i][j]->get_name() << " | "<< endl;
+                        cout << "| " << board_arr[i][j]->get_name() << " ";
+						if (j == 7)
+						{
+							cout << "|";
+						}
                     }
+					cout << endl;
                 }
+				cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
+				cout << "     a     b     c     d     e     f     g     h   " << endl;
                 press_to_continue();
             }
                 
@@ -338,12 +362,67 @@ int main()
 
             else if (menu_choose == 2)
             {
-                continue;
+				while (game_started)
+				{
+					clear(sys);
+					for (int i = 0; i < 8; i++)
+					{
+						cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
+						for (int j = 0; j < 8; j++)
+						{
+							if (j == 0)
+							{
+								cout << i + 1 << " ";
+							}
+							if (board_arr[i][j] == nullptr)
+							{
+								cout << "|     ";
+								if (j == 7)
+								{
+									cout << "|";
+								}
+								continue;
+							}
+							cout << "| " << board_arr[i][j]->get_name() << " ";
+							if (j == 7)
+							{
+								cout << "|";
+							}
+						}
+						cout << endl;
+					}
+					cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
+					cout << "     a     b     c     d     e     f     g     h   " << endl;
+					cout << "     0     1     2     3     4     5     6     7   (BETA)" << endl;
+
+					for (int i = 0; i < 2; i++)
+					{
+						if (i == WHITE)
+						{
+							cout << "enter figure position (ex: a 7):~> ";
+							cin >> coor[0]; cin >> coor[1];
+							cout << "enter figure next position (ex: a 6):~> ";
+							cin >> coor[2]; cin >> coor[3];
+							// cout << coor[0] << coor[1];
+							// cout << coor[2] << coor[3];
+
+							
+
+							game_started = false;			
+						}
+						
+						else
+						{
+							
+						}
+					}
+				}
+				press_to_continue();
             }
 
             else if (menu_choose == 3)
             {
-                continue;
+                continue; // BETA
             }
 
             else if (menu_choose == 4)
