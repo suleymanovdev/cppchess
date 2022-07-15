@@ -286,11 +286,14 @@ int main()
                 banner();
                 profile(user);
 
+				cout << "	choose(profile):~> ";
                 cin >> profile_choose;
                 
                 if (profile_choose == 1)
                 {
-                    string temp_password = 0;
+					clear(sys);
+					banner();
+                    string temp_password = "0";
                     cout << "Please enter user password:~> ";
                     cin >> temp_password;
                         
@@ -299,6 +302,7 @@ int main()
                         cout << "    enter new username:~> ";
                         cin >> usrnm;
                         user.set_username(usrnm);
+						press_to_continue();
                     }
 
                     else
@@ -310,6 +314,8 @@ int main()
 
                 else if (profile_choose == 2)
                 {
+					clear(sys);
+					banner();
                     string temp_password = "0";
                     cout << "Please enter user password:~> ";
                     cin >> temp_password;
@@ -318,7 +324,8 @@ int main()
                     {
                         cout << "    enter new password:~> ";
                         cin >> pass;
-                        user.set_username(pass);
+                        user.set_password(pass);
+						press_to_continue();
                     }
 
                     else
@@ -330,15 +337,19 @@ int main()
 
                 else if (profile_choose == 3)
                 {
+					clear(sys);
+					banner();
                     string temp_password = "0";
                     cout << "Please enter user password:~> ";
                     cin >> temp_password;
                         
                     if (user.get_password() == temp_password)
                     {
+
                         cout << "    enter new level:~> ";
                         cin >> usrnm;
                         user.set_username(usrnm);
+						press_to_continue();
                     }
 
                     else
@@ -399,6 +410,11 @@ int main()
 					{
 						if (i == WHITE)
 						{
+							int temp_x1 = 0;
+							int temp_x2 = 0;
+							int temp_y1 = 0;
+							int temp_y2 = 0;
+
 							cout << "enter figure position (ex: a 7):~> ";
 							cin >> coor[0]; cin >> coor[1];
 							cout << "enter figure next position (ex: a 6):~> ";
@@ -406,9 +422,20 @@ int main()
 							// cout << coor[0] << coor[1];
 							// cout << coor[2] << coor[3];
 
-							
+							lti(coor);
 
-							game_started = false;			
+							func(coor, *board_arr);
+
+							// temp_x1 = lti(coor, 0);
+							// temp_x2 = lti(coor, 2);
+
+							// temp_y1 = int(coor[1]);
+							// temp_y2 = int(coor[3]);
+
+							// board_arr[temp_y1][temp_x1]->go_function(temp_y2, temp_x2);
+
+							game_started = true;
+							press_to_continue();			
 						}
 						
 						else
