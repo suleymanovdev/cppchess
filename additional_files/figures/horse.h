@@ -38,7 +38,7 @@ public:
 		return y;
 	}
 
-	void go_function(char coor[]) override
+	void posch(int x, int y) override
 	{
 		
 	}

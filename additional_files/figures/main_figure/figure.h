@@ -43,12 +43,5 @@ public:
         return this->weight;
     }
 
-    Figure operator =()
-    {
-
-    }
-
-    //konstr kop
-
-	virtual void go_function(char coor[]) = 0;
+	virtual void posch(int x, int y) = 0;
 };

@@ -38,8 +38,12 @@ public:
 		return y;
 	}
 
-	void go_function(char coor[]) override
+	void posch(int y, int x) override
 	{
-		
+		// cout << "X: " << x << endl;
+		// cout << "Y: " << y << endl;
+
+		this->x = x;
+		this->y = y;
 	}
 };
