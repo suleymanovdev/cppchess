@@ -81,3 +81,14 @@ int addUser(User*& user_array, int& size, const string usrnm, const string pass,
 	user_array = temp_array;
 	return 1;
 }
+int find_user_account(User *& user_account,int &size,string name_arg,string password_arg)
+{
+      for (int i = 0; i < size; i++)
+    {
+        if (user_account [i].Password == password_arg && user_account[i].Name == name_arg)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
