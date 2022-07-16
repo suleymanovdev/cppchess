@@ -112,7 +112,8 @@ int main()
     Figure* killed_black_figures_arr[15] = {};
 
     // Creating user & data for it
-    User user;
+	int size_user_array = 0;
+    User* user_array = new User[size_user_array];
     string usrnm = " ";
     string pass = " ";
     int lvl = 0;
@@ -161,22 +162,18 @@ int main()
                     clear(sys);
                     cout << "    enter nickname:~> ";
                     cin >> usrnm;
-                    user.set_username(usrnm);
                     clear(sys);
                     cout << "    enter password:~> ";
                     cin >> pass;
-                    user.set_password(pass);
                     clear(sys);
                     cout << "    enter level:~> ";
                     cin >> lvl;
-                    user.set_level(lvl);
                     clear(sys);
 
-                    // Setting regisration bool (true)
-                    user.set_regbool(true);
+					addUser(user_array, size_user_array, usrnm, pass, lvl , true);
 
                     // Resul
-                    user.inf0();
+                    user_array[size_user_array].inf0();
 
                     usrnm = " ";
                     pass = " ";
@@ -197,6 +194,8 @@ int main()
 
                     // Result
                     user.inf0();
+
+					
                 }
 
                 else if (registration_choose == 3)
@@ -419,22 +418,18 @@ int main()
                             cin >> coor[0]; cin >> coor[1];
                             cout << "enter figure next position (ex: a 6):~> ";
                             cin >> coor[2]; cin >> coor[3];
-                            // cout << coor[0] << coor[1];
-                            // cout << coor[2] << coor[3];
 
-                            // lti(coor);
-
-                            // func(coor, *board_arr);
-
-                            temp_x1 = lti(coor, 0); // 0
+                            temp_x1 = lti(coor, 0);
                             temp_x2 = lti(coor, 2);
 
                             temp_y1 = ltl(coor, 1);
                             temp_y2 = ltl(coor, 3);
 
-                            board_arr[temp_y1][temp_x1]->posch(temp_y2, temp_x2);
-
-                            game_started = true;
+							if (board_arr[temp_y1][temp_x1]->get_color() == "white")
+							{
+								board_arr[temp_y1][temp_x1]->posch(temp_y2, temp_x2);
+								
+							}
                             press_to_continue();
                         }
 
