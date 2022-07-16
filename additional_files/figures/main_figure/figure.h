@@ -11,8 +11,16 @@ class Figure
 private:
     string name;
     string color;
+	int x;
+	int y;
     int weight = 0;
 public:
+	Figure()
+	{
+		x = 0;
+		y = 0;
+	}
+
     void set_color(string color)
     {
         this->color = color;
@@ -43,5 +51,25 @@ public:
         return this->weight;
     }
 
-	virtual void posch(int x, int y) = 0;
+	void set_x(int x)
+	{
+		this->x = x;
+	}
+
+	void set_y(int y)
+	{
+		this->y = y;
+	}
+
+	int get_x()
+	{
+		return x;
+	}
+
+	int get_y()
+	{
+		return y;
+	}
+
+    virtual void posch(int x, int y) = 0;
 };

@@ -18,12 +18,14 @@ class User
     string username; 
     string password;
     int level;
+	int id;
     bool regbool;
 public:
 	User()
 	{
         regbool = false;
 		level = 0;
+		id = 0;
 	}
 
 	void set_username(string username)

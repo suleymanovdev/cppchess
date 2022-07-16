@@ -66,25 +66,18 @@ int ltl(char coor[], int x)
 	else {return 0;}
 }
 
-// void lti(char coor[])
-// {
-// 	for (int i = 97; i < 105; i++)
-// 	{
-// 		if (coor[0] == char(i))
-// 		{
-// 			coor[0] = char(i - 49);
-// 		}
-// 		if (coor[2] == char(i))
-// 		{
-// 			coor[2] = char(i - 49);
-// 		}
-// 	}
-// }
-
-//void func(char coor[], Figure** board_arr)
-//{
-//	// board_arr[(int(coor[3]) - 97)][(int(coor[2]) - 97)] = board_arr[(int(coor[1]) - 97)][(int(coor[0]) - 97)];
-//    board_arr[(int(coor[3]) - 97)][(int(coor[2]) - 97)] = new board_arr[(int(coor[1]) - 97)][(int(coor[0]) - 97)];
-//	delete & board_arr[(int(coor[1]) - 97)][(int(coor[0]) - 97)];
-//	board_arr[(int(coor[1]) - 97)][(int(coor[0]) - 97)] = nullptr;
-//}
+int addUser(User*& user_array, int& size, const string usrnm, const string pass, const int lvl, const bool reg)
+{
+	User* temp_array = new User[size + 1];
+	User temp_user;
+	temp_user.set_name(usrnm); temp_user.set_password(pass); temp_user.set_level(lvl); temp_user.set_regbool(reg);
+	for (int i = 0; i < size; i++)
+	{
+		temp_array[i] = user_array[i];
+	}
+	temp_array[size] = temp_user;
+	size++;
+	delete[] user_array;
+	user_array = temp_array;
+	return 1;
+}
