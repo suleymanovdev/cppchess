@@ -112,12 +112,13 @@ int main()
     Figure* killed_black_figures_arr[15] = {};
 
     // Creating user & data for it
+    int current_user = 0;
 	int size_user_array = 0;
     User* user_array = new User[size_user_array];
     string usrnm = " ";
     string pass = " ";
     int lvl = 0;
-
+    
     // Data for players
     int white_player = 0;
     int black_player = 0;
@@ -140,7 +141,7 @@ int main()
         clear(sys);
         banner();
 
-        if (user.get_regbool() == false)
+        if (user_array[current_user].get_regbool() == false)
         {
             welcome();
             cout << "    choose(welcome):~> ";
@@ -184,18 +185,17 @@ int main()
                 {
                     // Registering as Guest
                     clear(sys);
-                    user.set_username("Guest");
-                    user.set_password("guest123");
-                    user.set_level(0000000);
+                    user_array[current_user].set_username("Guest");
+                    user_array[current_user].set_password("guest123");
+                    
+user_array[current_user].set_level(0000000);
                     clear(sys);
 
                     // Setting regisration bool (true)
-                    user.set_regbool(true);
+                    user_array[current_user].set_regbool(true);
 
                     // Result
-                    user.inf0();
-
-					
+                    user_array[current_user].inf0();
                 }
 
                 else if (registration_choose == 3)
@@ -272,7 +272,7 @@ int main()
             }
         }
 
-        else if (user.get_regbool() == true)
+        else if (user_array[current_user].get_regbool() == true)
         {
             menu();
             cout << "    choose(menu):~> ";
@@ -283,7 +283,7 @@ int main()
                 int profile_choose = 0;
                 clear(sys);
                 banner();
-                profile(user);
+                profile(user_array[current_user]);
 
                 cout << "	choose(profile):~> ";
                 cin >> profile_choose;
@@ -296,11 +296,11 @@ int main()
                     cout << "Please enter user password:~> ";
                     cin >> temp_password;
 
-                    if (user.get_password() == temp_password)
+                    if (user_array[current_user].get_password() == temp_password)
                     {
                         cout << "    enter new username:~> ";
                         cin >> usrnm;
-                        user.set_username(usrnm);
+                        user_array[current_user].set_username(usrnm);
                         press_to_continue();
                     }
 
@@ -319,7 +319,7 @@ int main()
                     cout << "Please enter user password:~> ";
                     cin >> temp_password;
 
-                    if (user.get_password() == temp_password)
+                    if (user_array[current_user].get_password() == temp_password)
                     {
                         cout << "    enter new password:~> ";
                         cin >> pass;
@@ -342,12 +342,12 @@ int main()
                     cout << "Please enter user password:~> ";
                     cin >> temp_password;
 
-                    if (user.get_password() == temp_password)
+                    if (user_array[current_user].get_password() == temp_password)
                     {
 
                         cout << "    enter new level:~> ";
                         cin >> usrnm;
-                        user.set_username(usrnm);
+                        user_array[current_user].set_username(usrnm);
                         press_to_continue();
                     }
 
@@ -450,10 +450,10 @@ int main()
             else if (menu_choose == 4)
             {
                 clear(sys);
-                user.set_username(" ");
-                user.set_password(" ");
-                user.set_level(0);
-                user.set_regbool(false);
+                user_array[current_user].set_username(" ");
+                user_array[current_user].set_password(" ");
+                user_array[current_user].set_level(0);
+                user_array[current_user].set_regbool(false);
                 continue;
             }
 
