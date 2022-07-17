@@ -50,24 +50,26 @@ int main()
     Queen w_Q, b_Q;
     King w_K, b_K;
 
+    bool WKing = true;
+    
     // Setting all settings on figures
-    w_p1.set_name("w_p"); w_p1.set_color("white"); w_p1.set_weight(1); // White Pawn #1
-    w_p2.set_name("w_p"); w_p2.set_color("white"); w_p2.set_weight(1); // White Pawn #2
-    w_p3.set_name("w_p"); w_p3.set_color("white"); w_p3.set_weight(1); // White Pawn #3
-    w_p4.set_name("w_p"); w_p4.set_color("white"); w_p4.set_weight(1); // White Pawn #4
-    w_p5.set_name("w_p"); w_p5.set_color("white"); w_p5.set_weight(1); // White Pawn #5
-    w_p6.set_name("w_p"); w_p6.set_color("white"); w_p6.set_weight(1); // White Pawn #6
-    w_p7.set_name("w_p"); w_p7.set_color("white"); w_p7.set_weight(1); // White Pawn #7
-    w_p8.set_name("w_p"); w_p8.set_color("white"); w_p8.set_weight(1); // White Pawn #8
+    w_p1.set_name("w_p"); w_p1.set_color("white"); w_p1.set_weight(1); //bool WPawn1 = true; // White Pawn #1
+    w_p2.set_name("w_p"); w_p2.set_color("white"); w_p2.set_weight(1); //bool WPawn2 = true; // White Pawn #2
+    w_p3.set_name("w_p"); w_p3.set_color("white"); w_p3.set_weight(1); //bool WPawn3 = true; // White Pawn #3
+    w_p4.set_name("w_p"); w_p4.set_color("white"); w_p4.set_weight(1); //bool WPawn4 = true; // White Pawn #4
+    w_p5.set_name("w_p"); w_p5.set_color("white"); w_p5.set_weight(1); //bool WPawn5 = true; // White Pawn #5
+    w_p6.set_name("w_p"); w_p6.set_color("white"); w_p6.set_weight(1); //bool WPawn6 = true; // White Pawn #6
+    w_p7.set_name("w_p"); w_p7.set_color("white"); w_p7.set_weight(1); //bool WPawn7 = true; // White Pawn #7
+    w_p8.set_name("w_p"); w_p8.set_color("white"); w_p8.set_weight(1); //bool WPawn8 = true; // White Pawn #8
     //===============================================================================
-    b_p1.set_name("b_p"); b_p1.set_color("black"); b_p1.set_weight(1); // Black Pawn #1
-    b_p2.set_name("b_p"); b_p2.set_color("black"); b_p2.set_weight(1); // Black Pawn #2
-    b_p3.set_name("b_p"); b_p3.set_color("black"); b_p3.set_weight(1); // Black Pawn #3
-    b_p4.set_name("b_p"); b_p4.set_color("black"); b_p4.set_weight(1); // Black Pawn #4
-    b_p5.set_name("b_p"); b_p5.set_color("black"); b_p5.set_weight(1); // Black Pawn #5
-    b_p6.set_name("b_p"); b_p6.set_color("black"); b_p6.set_weight(1); // Black Pawn #6
-    b_p7.set_name("b_p"); b_p7.set_color("black"); b_p7.set_weight(1); // Black Pawn #7
-    b_p8.set_name("b_p"); b_p8.set_color("black"); b_p8.set_weight(1); // Black Pawn #8
+    b_p1.set_name("b_p"); b_p1.set_color("black"); b_p1.set_weight(1); //bool BPawn1 = true; // Black Pawn #1
+    b_p2.set_name("b_p"); b_p2.set_color("black"); b_p2.set_weight(1); //bool BPawn2 = true; // Black Pawn #2
+    b_p3.set_name("b_p"); b_p3.set_color("black"); b_p3.set_weight(1); //bool BPawn3 = true; // Black Pawn #3
+    b_p4.set_name("b_p"); b_p4.set_color("black"); b_p4.set_weight(1); //bool BPawn4 = true; // Black Pawn #4
+    b_p5.set_name("b_p"); b_p5.set_color("black"); b_p5.set_weight(1); //bool BPawn5 = true; // Black Pawn #5
+    b_p6.set_name("b_p"); b_p6.set_color("black"); b_p6.set_weight(1); //bool BPawn6 = true; // Black Pawn #6
+    b_p7.set_name("b_p"); b_p7.set_color("black"); b_p7.set_weight(1); //bool BPawn7 = true; // Black Pawn #7
+    b_p8.set_name("b_p"); b_p8.set_color("black"); b_p8.set_weight(1); //bool BPawn8 = true; // Black Pawn #8
     //===============================================================================
     w_h1.set_name("w_h"); w_h1.set_color("white"); w_h1.set_weight(3); // White Horse #1
     w_h2.set_name("w_h"); w_h2.set_color("white"); w_h2.set_weight(3); // White Horse #2
@@ -91,12 +93,7 @@ int main()
     b_Q.set_name("b_Q"); b_Q.set_color("black"); b_Q.set_weight(9); // Black Queen
     w_K.set_name("w_K"); w_K.set_color("white"); w_K.set_weight(0); // White King
     b_K.set_name("b_K"); b_K.set_color("black"); b_K.set_weight(0); // Black King
-
-    // Creating arrays
-    // 1. Board with figures
-    // 2. White killed figures
-    // 3. Black killed figures
-
+    
     Figure* board_arr[8][8] = {
         {&b_r1, &b_h1, &b_e1, &b_Q, &b_K, &b_e2, &b_h2, &b_r2},
         {&b_p1, &b_p2, &b_p3, &b_p4, &b_p5, &b_p6, &b_p7, &b_p8},
@@ -107,22 +104,14 @@ int main()
         {&w_p1, &w_p2, &w_p3, &w_p4, &w_p5, &w_p6, &w_p7, &w_p8},
         {&w_r1, &w_h1, &w_e1, &w_Q, &w_K, &w_e2, &w_h2, &w_r2},
     };
-
     Figure* killed_white_figures_arr[15] = {};
     Figure* killed_black_figures_arr[15] = {};
-
-    // Creating user & data for it
-    // User user;
     User user;
     string usrnm = " ";
     string pass = " ";
     int lvl = 0;
-    
-    // Data for players
     int white_player = 0;
     int black_player = 0;
-
-    // Data for cycle
     int welcome_choose = 0;
     int menu_choose = 0;
     bool game_started = true;
@@ -130,11 +119,9 @@ int main()
     string y_coor = " ";
     char coor[4] = {};
 
-    // Entering system name
-    cout << "Ou. Hello! Enter your system name:~> ";
+    cout << "Guten Tag! Enter your system name:~> ";
     cin >> sys;
 
-    // Cycle
     while (true)
     {
         clear(sys);
@@ -158,7 +145,6 @@ int main()
 
                 if (registration_choose == 1)
                 {
-                    // Registering
                     clear(sys);
                     cout << "    enter nickname:~> ";
                     cin >> usrnm;
@@ -170,7 +156,6 @@ int main()
                     cin >> lvl;
                     clear(sys);
 
-                    // Result
                     user.set_username(usrnm);
                     user.set_password(pass);
                     user.set_level(lvl);
@@ -183,17 +168,13 @@ int main()
                 }
                 else if (registration_choose == 2)
                 {
-                    // Registering as Guest
                     clear(sys);
                     user.set_username("Guest");
                     user.set_password("guest123");
                     user.set_level(0000000);
                     clear(sys);
 
-                    // Setting regisration bool (true)
                     user.set_regbool(true);
-
-                    // Result
                     user.inf0();
                 }
                 else if (registration_choose == 3)
@@ -206,7 +187,6 @@ int main()
             else if (welcome_choose == 2)
             {
                 clear(sys);
-                //test: cout << board_arr[1][1]->get_name();
                 for (int i = 0; i < 8; i++)
                 {
                     cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
@@ -364,16 +344,18 @@ int main()
                 int queen_ = 0;
                 int king_ = 0;
                 
-                bool pawn_first_action = true;
-                bool king_first_action = true;
                 while (game_started)
                 {
                     clear(sys);
+                    
                     Play player = WHITE;
                     
                     while (true)
                     {
                         clear(sys);
+
+                        cout << "USER: " << user.get_username() << " | " << "LEVEL: " << user.get_level() << endl << endl;
+                        
                         for (int i = 0; i < 8; i++)
                         {
                             cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
@@ -402,98 +384,314 @@ int main()
                         }
                         cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
                         cout << "     a     b     c     d     e     f     g     h   " << endl;
+                        cout << endl;
                         
                         if (player == WHITE)
                         {
+                            int white_player_choose = 0;
+                            
                             cout << "WHITE PLAYER TURN!" << endl;
                             cout << "enter figure position (ex: a 7):~> ";
                             cin >> coor[0]; cin >> coor[1];
-                            cout << "enter figure next position (ex: a 6):~> ";
-                            cin >> coor[2]; cin >> coor[3];
+                            
+                            int x = lti(coor, 0);
+                            int y = ltl(coor, 1);
 
-                            int x1 = lti(coor, 0);
-                            int x2 = lti(coor, 2);
-
-                            int y1 = ltl(coor, 1);
-                            int y2 = ltl(coor, 3);
-
-            			    if (board_arr[y1][x1]->get_color() == "white")
-            			    {
-            				    board_arr[y1][x1]->posch(y2, x2);
+                            if (board_arr[y][x]->get_name() == "w_p")
+                            {
+                                board_arr[y][x]->info();
+                                cout << endl << "    enter pawn choose:~> ";
+                                cin >> white_player_choose;
                                 
-                                if (board_arr[y1][x1]->get_name() == "w_p")
+                                switch (white_player_choose)
                                 {
-                                    pawn_ = y1;
-                                    if (pawn_first_action == true)
+                                case 1:
                                     {
-                                        if (y1 >= 5)
+                                        cout << "enter figure next position (ex: a 6):~> ";
+                                        cin >> coor[2]; cin >> coor[3];
+            
+                                        int x1 = lti(coor, 0);
+                                        int y1 = ltl(coor, 1);
+                                        int x2 = lti(coor, 2);
+                                        int y2 = ltl(coor, 3);
+    
+                                        pawn_ = y1;
+                                        
+                                        if (y2 >= 4)
                                         {
-                                            cout << "fa" << endl;
-                                            delete board_arr[y2][x2];
-                                            board_arr[y2][x2] = board_arr[y1][x1];
-                                            board_arr[y1][x1] = nullptr;
-                                            pawn_first_action = false;
-                                            player = BLACK;
+                                            if (board_arr[y2][x2] == nullptr)
+                                            {
+                                                delete board_arr[y2][x2];
+                                                board_arr[y2][x2] = board_arr[y1][x1];
+                                                board_arr[y1][x1] = nullptr;
+                                                player = BLACK;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                cout << "This area is blocked by another figure." << endl;
+                                                press_to_continue();
+                                                continue;
+                                            } 
                                         }
-                                        else if (y1 = (pawn_ - 1))
+                                        else if (y2 == (pawn_ - 1))
                                         {
-                                            cout << "fr" << endl;
-                                            delete board_arr[y2][x2];
-                                            board_arr[y2][x2] = board_arr[y1][x1];
-                                            board_arr[y1][x1] = nullptr;
-                                            pawn_first_action = false;
-                                            player = BLACK;
+                                            if (board_arr[y2][x2] == nullptr)
+                                            {
+                                                delete board_arr[y2][x2];
+                                                board_arr[y2][x2] = board_arr[y1][x1];
+                                                board_arr[y1][x1] = nullptr;
+                                                player = BLACK;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                cout << "This area is blocked by another figure." << endl;
+                                                press_to_continue();
+                                                continue;
+                                            } 
                                         }
                                         else
                                         {
                                             cout << "Pls try again with another position." << endl;
+                                            press_to_continue();
                                             continue;
                                         }
                                     }
-                                    else
+
+                                case 2:
                                     {
-                                        if (y2 = (y1 - 1))
+                                        cout << "enter figure next position (ex: a 6):~> ";
+                                        cin >> coor[2]; cin >> coor[3];
+            
+                                        int x1 = lti(coor, 0);
+                                        int y1 = ltl(coor, 1);
+                                        int x2 = lti(coor, 2);
+                                        int y2 = ltl(coor, 3);
+    
+                                        pawn_ = y1;
+    
+                                        if (board_arr[y2][x2]->get_color() == "black")
                                         {
-                                            cout << "ff" << endl;
-                                            delete board_arr[y2][x2];
-                                            board_arr[y2][x2] = board_arr[y1][x1];
-                                            board_arr[y1][x1] = nullptr;
-                                            pawn_ = y2;
-                                            player = BLACK;
+                                            if (x2 == (x1 + 1) && y2 == (y1 - 1))
+                                            {
+                                                delete board_arr[y2][x2];
+                                                board_arr[y2][x2] = board_arr[y1][x1];
+                                                board_arr[y1][x1] = nullptr;
+                                                player = BLACK;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                cout << "Something went wrong." << endl;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            cout << "You can't kill your team figure." << endl;
+                                            press_to_continue();
+                                            continue;
+                                        }
+                                    }
+
+                                case 3:
+                                    {
+                                        cout << "enter figure next position (ex: a 6):~> ";
+                                        cin >> coor[2]; cin >> coor[3];
+            
+                                        int x1 = lti(coor, 0);
+                                        int y1 = ltl(coor, 1);
+                                        int x2 = lti(coor, 2);
+                                        int y2 = ltl(coor, 3);
+    
+                                        pawn_ = y1;
+    
+                                        if (board_arr[y2][x2]->get_color() == "black")
+                                        {
+                                            if (x2 == (x1 - 1) && y2 == (y1 - 1))
+                                            {
+                                                delete board_arr[y2][x2];
+                                                board_arr[y2][x2] = board_arr[y1][x1];
+                                                board_arr[y1][x1] = nullptr;
+                                                player = BLACK;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                cout << "Something went wrong." << endl;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            cout << "You can't kill your team figure." << endl;
+                                            press_to_continue();
+                                            continue;
                                         }
                                     }
                                 }
-                                else if (board_arr[y1][x1]->get_name() == "w_h"){
-                                    
-                                }
-                                else if (board_arr[y1][x1]->get_name() == "w_e"){
-                                    
-                                }
-                                else if (board_arr[y1][x1]->get_name() == "w_r"){
-                                    
-                                }
-                                else if (board_arr[y1][x1]->get_name() == "w_Q"){
-                                    
-                                }
-                                else if (board_arr[y1][x1]->get_name() == "w_K"){
-                                    
-                                }
-                                else
+                            }
+                            else if (board_arr[y][x]->get_name() == "w_h") {}
+                            else if (board_arr[y][x]->get_name() == "w_e") 
+                            {
+                                board_arr[y][x]->info();
+                                cout << endl << "    enter elephant choose:~> ";
+                                cin >> white_player_choose;
+                                
+                                switch (white_player_choose)
                                 {
-                                    cout << "Err: 0450" << endl;
-                                    error();
-                                    exit(0);
-                                }
-			                }
+                                case 1:
+                                    {
+                                        cout << "enter figure next position (ex: a 6):~> ";
+                                        cin >> coor[2]; cin >> coor[3];
+            
+                                        int x1 = lti(coor, 0);
+                                        int y1 = ltl(coor, 1);
+                                        int x2 = lti(coor, 2);
+                                        int y2 = ltl(coor, 3);
+    
+                                        pawn_ = y1;
+                                        
+                                        if (y2 >= 4)
+                                        {
+                                            if (board_arr[y2][x2] == nullptr)
+                                            {
+                                                delete board_arr[y2][x2];
+                                                board_arr[y2][x2] = board_arr[y1][x1];
+                                                board_arr[y1][x1] = nullptr;
+                                                player = BLACK;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                cout << "This area is blocked by another figure." << endl;
+                                                press_to_continue();
+                                                continue;
+                                            } 
+                                        }
+                                        else if (y2 == (pawn_ - 1))
+                                        {
+                                            if (board_arr[y2][x2] == nullptr)
+                                            {
+                                                delete board_arr[y2][x2];
+                                                board_arr[y2][x2] = board_arr[y1][x1];
+                                                board_arr[y1][x1] = nullptr;
+                                                player = BLACK;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                cout << "This area is blocked by another figure." << endl;
+                                                press_to_continue();
+                                                continue;
+                                            } 
+                                        }
+                                        else
+                                        {
+                                            cout << "Pls try again with another position." << endl;
+                                            press_to_continue();
+                                            continue;
+                                        }
+                                    }
 
+                                case 2:
+                                    {
+                                        cout << "enter figure next position (ex: a 6):~> ";
+                                        cin >> coor[2]; cin >> coor[3];
+            
+                                        int x1 = lti(coor, 0);
+                                        int y1 = ltl(coor, 1);
+                                        int x2 = lti(coor, 2);
+                                        int y2 = ltl(coor, 3);
+    
+                                        pawn_ = y1;
+    
+                                        if (board_arr[y2][x2]->get_color() == "black")
+                                        {
+                                            if (x2 == (x1 + 1) && y2 == (y1 - 1))
+                                            {
+                                                delete board_arr[y2][x2];
+                                                board_arr[y2][x2] = board_arr[y1][x1];
+                                                board_arr[y1][x1] = nullptr;
+                                                player = BLACK;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                cout << "Something went wrong." << endl;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            cout << "You can't kill your team figure." << endl;
+                                            press_to_continue();
+                                            continue;
+                                        }
+                                    }
+
+                                case 3:
+                                    {
+                                        cout << "enter figure next position (ex: a 6):~> ";
+                                        cin >> coor[2]; cin >> coor[3];
+            
+                                        int x1 = lti(coor, 0);
+                                        int y1 = ltl(coor, 1);
+                                        int x2 = lti(coor, 2);
+                                        int y2 = ltl(coor, 3);
+    
+                                        pawn_ = y1;
+    
+                                        if (board_arr[y2][x2]->get_color() == "black")
+                                        {
+                                            if (x2 == (x1 - 1) && y2 == (y1 - 1))
+                                            {
+                                                delete board_arr[y2][x2];
+                                                board_arr[y2][x2] = board_arr[y1][x1];
+                                                board_arr[y1][x1] = nullptr;
+                                                player = BLACK;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                cout << "Something went wrong." << endl;
+                                                press_to_continue();
+                                                continue;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            cout << "You can't kill your team figure." << endl;
+                                            press_to_continue();
+                                            continue;
+                                        }
+                                    }
+                                }
+                            }
+                            else if (board_arr[y][x]->get_name() == "w_Q") {}
+                            else if (board_arr[y][x]->get_name() == "w_K") {}
+                            else {}
+                            
                             press_to_continue();
                         }
                         else if (player == BLACK)
                         {
 			                cout << "BLACK PLAYER TURN!" << endl;
-                            
-                            player = WHITE;
 
+                            player = WHITE;
+                            
                             press_to_continue();
                         }
                         else
