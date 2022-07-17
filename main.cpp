@@ -417,10 +417,10 @@ int main()
                             int y1 = ltl(coor, 1);
                             int y2 = ltl(coor, 3);
 
-							if (board_arr[y1][x1]->get_color() == "white")
-							{
+			    if (board_arr[y1][x1]->get_color() == "white")
+			    {
                                 // Giving x & y position.
-								board_arr[y1][x1]->posch(y2, x2);
+				board_arr[y1][x1]->posch(y2, x2);
                                 
                                 if (board_arr[y1][x1]->get_name() == "w_p")
                                 {
@@ -485,13 +485,13 @@ int main()
                                     error();
                                     exit(0);
                                 }
-							}
+			}
 
                             press_to_continue();
                         }
                         else if (player == BLACK)
                         {
-							cout << "BLACK PLAYER TURN!" << endl;
+			    cout << "BLACK PLAYER TURN!" << endl;
                             
                             player = WHITE;
 
