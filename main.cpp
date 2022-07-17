@@ -419,7 +419,7 @@ int main()
 
             			    if (board_arr[y1][x1]->get_color() == "white")
             			    {
-            				board_arr[y1][x1]->posch(y2, x2);
+            				    board_arr[y1][x1]->posch(y2, x2);
                                 
                                 if (board_arr[y1][x1]->get_name() == "w_p")
                                 {
@@ -484,13 +484,13 @@ int main()
                                     error();
                                     exit(0);
                                 }
-			}
+			                }
 
                             press_to_continue();
                         }
                         else if (player == BLACK)
                         {
-			    cout << "BLACK PLAYER TURN!" << endl;
+			                cout << "BLACK PLAYER TURN!" << endl;
                             
                             player = WHITE;
 
