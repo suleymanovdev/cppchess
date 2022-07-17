@@ -66,29 +66,30 @@ int ltl(char coor[], int x)
 	else {return 0;}
 }
 
-int addUser(User*& user_array, int& size, const string usrnm, const string pass, const int lvl, const bool reg)
-{
-	User* temp_array = new User[size + 1];
-	User temp_user;
-	temp_user.set_name(usrnm); temp_user.set_password(pass); temp_user.set_level(lvl); temp_user.set_regbool(reg);
-	for (int i = 0; i < size; i++)
-	{
-		temp_array[i] = user_array[i];
-	}
-	temp_array[size] = temp_user;
-	size++;
-	delete[] user_array;
-	user_array = temp_array;
-	return 1;
-}
-int find_user_account(User *& user_account,int &size,string name_arg,string password_arg)
-{
-      for (int i = 0; i < size; i++)
-    {
-        if (user_account [i].Password == password_arg && user_account[i].Name == name_arg)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
+// int addUser(User*& user_array, int& size, const string usrnm, const string pass, const int lvl, const bool reg)
+// {
+// 	User* temp_array = new User[size + 1];
+// 	User temp_user;
+// 	temp_user.set_username(usrnm); temp_user.set_password(pass); temp_user.set_level(lvl); temp_user.set_regbool(reg);
+// 	for (int i = 0; i < size; i++)
+// 	{
+// 		temp_array[i] = user_array[i];
+// 	}
+// 	temp_array[size] = temp_user;
+// 	size = size+1;
+// 	delete[] user_array;
+// 	user_array = temp_array;
+// 	return 1;
+// }
+
+// int find_user_account(User *& user_account, int &size, string name_arg, string password_arg)
+// {
+//       for (int i = 0; i < size; i++)
+//     {
+//         if (user_account [i].get_password() == password_arg && user_account[i].get_username() == name_arg)
+//         {
+//             return i;
+//         }
+//     }
+//     return -1;
+// }

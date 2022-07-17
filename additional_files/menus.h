@@ -44,7 +44,7 @@ void menu()
     cout << endl;
 	cout << "		3. Play with c0mputer. (BETA)					" << endl; // In process.
     cout << endl;
-	cout << "		4. Log Out.										" << endl; // user.set_regbool(false);
+	cout << "		4. Switch Account.								" << endl; // user.set_regbool(false);
     cout << endl;
 	cout << "		5. About.										" << endl; // about();
     cout << endl;
@@ -56,11 +56,11 @@ void menu()
 void profile(User& user)
 {
     cout << endl;
-    cout << "      ---============USER PROFILE============---           " << endl;
+    cout << "      ---============USER PROFILE============---       " << endl;
     cout << endl;
-    cout << "          USERNAME: " << user.get_username()                 << endl;
-    cout << "          PASSWORD: " << user.get_password()                 << endl;
-    cout << "          LEVEL: " << user.get_level()                       << endl;
+    cout << "          USERNAME: " << user.get_username()             << endl;
+    cout << "          PASSWORD: " << user.get_password()             << endl;
+    cout << "          LEVEL: " << user.get_level()                   << endl;
 
 	cout << endl;
 	cout << "		1. Change username.								" << endl; // Checking with changing.

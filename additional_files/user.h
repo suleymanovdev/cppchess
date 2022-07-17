@@ -7,7 +7,7 @@ using namespace std;
 	This is .h file with user classe settings.
 */
 
-enum Player
+enum Play
 {
 	WHITE, // 0
 	BLACK  // 1

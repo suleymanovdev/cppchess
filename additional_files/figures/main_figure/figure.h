@@ -71,5 +71,6 @@ public:
 		return y;
 	}
 
+
     virtual void posch(int x, int y) = 0;
 };
