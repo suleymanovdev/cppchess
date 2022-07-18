@@ -1,6 +1,6 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
-#include <stdio.h>
+#include "user.h"
 using namespace std;
 
 /*
@@ -20,9 +20,9 @@ void banner()
 void welcome()
 {
     cout << endl;
-    cout << "      ---==============WELCOME===============---           " << endl;
+    cout << "      ---==============WELCOME===============---       " << endl;
 	cout << endl;
-	cout << "		1. Reg / Log In.								" << endl; // reg_and_login();
+	cout << "		1. Registration.								" << endl; // reg_and_login();
     cout << endl;
 	cout << "		2. Board.										" << endl; // boardinfo();
     cout << endl;
@@ -36,19 +36,19 @@ void welcome()
 void menu()
 {
     cout << endl;
-    cout << "      ---================MENU================---           " << endl;
+    cout << "      ---================MENU================---       " << endl;
     cout << endl;
 	cout << "		1. Profile.										" << endl; // profile();
     cout << endl;
 	cout << "		2. Play.										" << endl; // In process.
     cout << endl;
-	cout << "		3. Play with c0mputer. (BETA)					" << endl; // In process.
+	cout << "		3. Play with computer. (BETA)					" << endl; // In process.
     cout << endl;
-	cout << "		4. Switch Account.								" << endl; // user.set_regbool(false);
+	cout << "		4. License.										" << endl; // license();
     cout << endl;
 	cout << "		5. About.										" << endl; // about();
     cout << endl;
-	cout << "		6. License.										" << endl; // license();
+	cout << "		6. Log Out.										" << endl; // user.set_regbool(false);
 	cout << endl;
 	cout << "		7. Exit.										" << endl; // exit(0);
 }
@@ -56,28 +56,28 @@ void menu()
 void profile(User& user)
 {
     cout << endl;
-    cout << "      ---============USER PROFILE============---       " << endl;
+    cout << "      ---============user profıle============---       " << endl;
     cout << endl;
-    cout << "          USERNAME: " << user.get_username()             << endl;
-    cout << "          PASSWORD: " << user.get_password()             << endl;
-    cout << "          LEVEL: " << user.get_level()                   << endl;
+    cout << "          username: " << user.get_username()             << endl;
+    cout << "          password: " << user.get_password()             << endl;
+    cout << "          level: " << user.get_level()                   << endl;
 
 	cout << endl;
-	cout << "		1. Change username.								" << endl; // Checking with changing.
+	cout << "		1. change username.								" << endl; // checking with changing.
     cout << endl;
-	cout << "		2. Change password.								" << endl; // Checking with changing.
+	cout << "		2. change password.								" << endl; // checking with changing.
     cout << endl;
-	cout << "		3. Change level.								" << endl; // Checking with changing.
+	cout << "		3. change level.								" << endl; // checking with changing.
     cout << endl;
-	cout << "		4. Back.							        	" << endl; // continue;
+	cout << "		4. back.							        	" << endl; // continue;
 }
 
 void reg_and_login()
 {
     cout << endl;
-    cout << "      ---============REGISTRATION============---           " << endl;
+    cout << "      ---============REGISTRATION============---       " << endl;
 	cout << endl;
-	cout << "		1. REGISTRATION.								" << endl;
+	cout << "		1. Sign Up.										" << endl;
     cout << endl;
 	cout << "		2. Log In as Guest. (BETA)						" << endl;
     cout << endl;

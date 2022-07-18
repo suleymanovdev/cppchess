@@ -71,8 +71,9 @@ public:
 	void inf0()
 	{
 		cout << "USER PROFILE (INFO)" << endl;
+		cout << endl;
 		cout << "USERNAME: " << this->username << endl;
 		cout << "PASSWORD: " << this->password << endl;
-		cout << "LEVEL: " << this->level << endl;
+		cout << "CHESS LEVEL: " << this->level << endl;
 	}
 };

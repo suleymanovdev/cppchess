@@ -18,9 +18,6 @@ public:
 
 	void posch(int y, int x) override
 	{
-		// cout << "X: " << x << endl;
-		// cout << "Y: " << y << endl;
-
 		set_x(x);
 		set_y(y);
 	}
