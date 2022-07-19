@@ -2,10 +2,6 @@
 #include <string>
 using namespace std;
 
-/*
-	This is .h file with figure base-classe settings.
-*/
-
 class Figure
 {
 private:

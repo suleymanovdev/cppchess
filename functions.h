@@ -1,21 +1,26 @@
 #include <iostream>
 #include <string>
+#include <windows.h>
 using namespace std;
 
-void clear(string system_name)
+void clear()
 {
-    if (system_name == "win")
+    system("cls");
+}
+
+void loading()
+{
+    int arr[20] = {254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254};
+    cout << endl << endl << endl;
+    cout << "           loading: ";
+    for (int i = 0; i < 20; i++)
     {
-        system("cls");
+        cout << char(arr[i]);
+        Sleep(150);
     }
-    else if (system_name == "linux")
-    {
-        system("clear");
-    }
-    else
-    {
-        system("clear");
-    }
+    Sleep(100);
+    cout << "   Done.";
+    Sleep(600);
 }
 
 void press_to_continue()

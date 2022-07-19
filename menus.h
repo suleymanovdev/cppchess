@@ -3,10 +3,6 @@
 #include "user.h"
 using namespace std;
 
-/*
-	This is .h file for project menus.
-*/
-
 void banner()
 {
     cout << "	   ______              ________                  				" << endl;

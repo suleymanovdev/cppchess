@@ -3,10 +3,6 @@
 #include <string>
 using namespace std;
 
-/*
-	This is .h file with user classe settings.
-*/
-
 enum Play
 {
 	WHITE, // 0
