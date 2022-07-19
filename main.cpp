@@ -83,6 +83,7 @@ int main()
 	string temp_password;
 	int level = 0;
 	string registration;
+	char coor[4]{};
 
 	// MAIN CODE
 	User user;
@@ -344,6 +345,9 @@ int main()
 				}
 				cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
 				cout << "     a     b     c     d     e     f     g     h   " << endl;
+
+
+				
 				break;
 			case 3:
 				// In process.
