@@ -1,0 +1,4 @@
+﻿  chess.cpp
+C:\Users\Elvin\Desktop\chess\chess\menus.h(55,13): warning C4566: символ, представленный универсальным именем символа "\u0131", невозможно представить в текущей кодовой странице (1251)
+C:\Users\Elvin\Desktop\chess\chess\chess.cpp(271,8): warning C4101: temp_level: неиспользованная локальная переменная
+  chess.vcxproj -> C:\Users\Elvin\Desktop\chess\x64\Debug\chess.exe
