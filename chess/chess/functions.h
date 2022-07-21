@@ -10,17 +10,16 @@ void clear()
 
 void loading()
 {
-    int arr[20] = {254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254};
     cout << endl << endl << endl;
     cout << "           loading: ";
     for (int i = 0; i < 20; i++)
     {
-        cout << char(arr[i]);
-        Sleep(150);
+        cout << char(254);
+        Sleep(50);
     }
-    Sleep(100);
+    Sleep(50);
     cout << "   Done.";
-    Sleep(600);
+    Sleep(400);
 }
 
 void press_to_continue()
