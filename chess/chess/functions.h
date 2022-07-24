@@ -17,7 +17,7 @@ void loading()
         cout << char(254);
         Sleep(50);
     }
-    Sleep(50);
+    Sleep(60);
     cout << "   Done.";
     Sleep(400);
 }

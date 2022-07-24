@@ -54,4 +54,7 @@
       <Filter>Файлы заголовков\figures</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="ctrv.txt" />
+  </ItemGroup>
 </Project>

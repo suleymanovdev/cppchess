@@ -39,4 +39,7 @@ public:
     {
         return this->weight;
     }
+
+    virtual void set_first_action(bool first_action) = 0;
+    virtual bool get_first_action() = 0;
 };

@@ -20,10 +20,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Start: July 03, 2022
+End: 
 */
 
 #include <iostream>
 #include <string>
+#include <stdio.h>
 // ADDITIONAL FILES
 #include "menus.h"
 #include "functions.h"
@@ -40,8 +44,6 @@ using namespace std;
 
 int main()
 {
-
-	
 	// Creating figures(objects)
 	Pawn w_p1, w_p2, w_p3, w_p4, w_p5, w_p6, w_p7, w_p8, b_p1, b_p2, b_p3, b_p4, b_p5, b_p6, b_p7, b_p8;
 	Horse w_h1, w_h2, b_h1, b_h2;
@@ -100,7 +102,7 @@ int main()
 		{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
 		{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
 		{&w_p1, &w_p2, &w_p3, &w_p4, &w_p5, &w_p6, &w_p7, &w_p8},
-		{&w_r1, &w_h1, &w_e1, &w_Q, &w_K, &w_e2, &w_h2, &w_r2},
+		{&w_r1, &w_h1, &w_e1, &w_Q, &w_K, &w_e2, &w_h2, &w_r2}
 	};
 
 	// DATA FOR PROGRAMM
@@ -122,10 +124,6 @@ int main()
 	bool game_result = false;
 	bool rook_res = true;
 	bool elep_res = true;
-	bool white_pawn_first_action = false;
-	bool white_king_first_action = false;
-	bool black_pawn_first_action = false;
-	bool black_king_first_action = false;
 	Play player = WHITE;
 
 	// MAIN CODE
@@ -158,12 +156,12 @@ int main()
 					clear();
 					banner();
 					cout << endl;
-					cout << "Enter username (ex: Grosmaster2000) --> ";
+					cout << "Enter username [ex: Grosmaster2000] --> ";
 					cin >> username;
 					clear();
 					banner();
 					cout << endl;
-					cout << "Enter password: (ex: qwerty+_chess) --> ";
+					cout << "Enter password [ex: qwerty+_chess] --> ";
 					cin >> password;
 					clear();
 					banner();
@@ -260,7 +258,7 @@ int main()
 				cout << "Auf Wiedersehen!" << endl;
 				exit(0);
 			default:
-				cout << "Err: Welcome." << endl;
+				cout << "Err: Welcome Menu." << endl;
 				error();
 				press_to_continue();
 				break;
@@ -270,7 +268,7 @@ int main()
 		{
 			string temp_username;
 			string temp_password;
-			int temp_level = 0;
+			int temp_level;
 
 			clear();
 			loading();
@@ -304,7 +302,7 @@ int main()
 					}
 					else
 					{
-						cout << " Sorry, but password is wrong.";
+						cout << "Err: Wrong Password." << endl;
 						press_to_continue();
 					}
 					break;
@@ -323,7 +321,7 @@ int main()
 					}
 					else
 					{
-						cout << " Sorry, but password is wrong.";
+						cout << "Err: Wrong Password." << endl;
 						press_to_continue();
 					}
 					break;
@@ -341,7 +339,7 @@ int main()
 					while (game)
 					{
 						clear();
-						cout << "PLAYER: " << user.get_username() << "	SCORE: " << user.get_level() << endl;
+						cout << "WHITE PLAYER: " << user.get_username() << "  LEVEL: " << user.get_level() << endl << endl;
 						for (int i = 0; i < 8; i++)
 						{
 							cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
@@ -373,630 +371,650 @@ int main()
 
 						if (player == WHITE)
 						{
-							cout << "TURN: WHITE" << endl << endl;
-							cout << "enter figure position (ex: a 7) --> ";
-							cin >> coor[0];	cin >> coor[1];
-
-							cout << "enter next position (ex: a 6) --> ";
-							cin >> coor[2];	cin >> coor[3];
-
-							xf = lti(coor, 0); yf = ltl(coor, 1); xn = lti(coor, 2); yn = ltl(coor, 3);
-
-							if (board_arr[yf][xf]->get_name() == "w_p")
+							printf("\n\t\WHITE: \n");
+							printf("\t\tchoose figure [ex: e7] --> ");
+							cin >> coor[0];
+							cin >> coor[1];
+							xf = 0;
+							yf = 0;
+							xn = 0;
+							xf = 0;
+							xf = lti(coor, 0);
+							yf = ltl(coor, 1);
+							
+							/*
+										WHITE
+							*/
+							if (board_arr[yf][xf] != nullptr)
 							{
-								if (board_arr[yn][yn] == nullptr)
+								if (board_arr[yf][xf]->get_name() == "w_p")
 								{
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if (board_arr[yf][xf]->get_first_action() == false)
+									{
+										if ((xn == xf && yn == (yf - 1)) || (xn == xf && yn == (yf - 2)))
+										{
+											if (board_arr[yn][xn] == nullptr)
+											{
+												board_arr[yf][xf]->set_first_action(true);
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = BLACK;
+												printf("Foward.\n");
+												press_to_continue();
+											}
+											else
+											{
+												printf("Err: Position is blocked.");
+												press_to_continue();
+											}
+										}
+										else if ((yn == (yf - 1) && xn == (xf - 1)) || (yn == (yf - 1) && xn == (xf + 1)))
+										{
+											if (board_arr[yn][xn] == nullptr)
+											{
+												printf("Err: You can't go to this positon because on this position no figures.\n");
+												press_to_continue();
+											}
+											else
+											{
+												if (board_arr[yn][xn]->get_color() == "white")
+												{
+													printf("Err: You can't kill your figures.\n");
+													press_to_continue();
+												}
+												else
+												{
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														if (yn == 0)
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight() + 5);
+															board_arr[yn][xn] = &w_Q_temp;
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+														}
+														printf("Right & Left.\n");
+														press_to_continue();
+													}
+												}
+											}
+										}
+									}
+									else if (board_arr[yf][xf]->get_first_action() == true)
+									{
+										if (xn == xf && yn == (yf - 1))
+										{
+											if (board_arr[yn][xn] == nullptr)
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = BLACK;
+												printf("Foward.\n");
+												press_to_continue();
+											}
+											else
+											{
+												printf("Err: Position is blocked.");
+												press_to_continue();
+											}
+										}
+										else if ((yn == (yf - 1) && xn == (xf - 1)) || (yn == (yf - 1) && xn == (xf + 1)))
+										{
+											if (board_arr[yn][xn] == nullptr)
+											{
+												printf("You can't go to this positon because on this position no figures.\n");
+												press_to_continue();
+											}
+											else
+											{
+												if (board_arr[yn][xn]->get_color() == "white")
+												{
+													printf("Err: You can't kill your figures.\n");
+													press_to_continue();
+												}
+												else
+												{
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														if (yn == 0)
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight() + 5);
+															board_arr[yn][xn] = &w_Q_temp;
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+														}
+														printf("Right & Left.\n");
+														press_to_continue();
+													}
+												}
+											}
+										}
+									}
+									else
+									{
+										printf("Err: Pawn first_action not false & true.\n");
+										press_to_continue();
+									}
+								}
+								else if (board_arr[yf][xf]->get_name() == "w_h")
+								{
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if ((yn == (yf - 2) && xn == (xf - 1)) || (yn == (yf - 2) && xn == (xf + 1)) || (yn == (yf + 2) && xn == (xf - 1)) || (yn == (yf + 2) && xn == (xf + 1)) || (yn == (yf - 1) && xn == (xf - 2)) || (yn == (yf + 1) && xn == (xf - 2)) || (yn == (yf - 1) && xn == (xf + 2)) || (yn == (yf + 1) && xn == (xf + 2)))
+									{
+										if (board_arr[yn][xn] == nullptr)
+										{
+											board_arr[yn][xn] = board_arr[yf][xf];
+											board_arr[yf][xf] = nullptr;
+											player = BLACK;
+											printf("Forward.\n");
+											press_to_continue();
+										}
+										else
+										{
+											if (board_arr[yn][xn]->get_color() == "white")
+											{
+												printf("Err: You can't kill your figures.\n");
+												press_to_continue();
+											}
+											else
+											{
+												if (board_arr[yn][xn]->get_name() == "b_K")
+												{
+													user.set_level(user.get_level() + 10);
+													game_result = true;
+													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
+													press_to_continue();
+												}
+											}
+										}
+									}
+								}
+								else if (board_arr[yf][xf]->get_name() == "w_e")
+								{
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if (xn > xf && yf > yn)
+									{
+										elep_res = true;
+										for (int i = yf - 1; i > yn; i--)
+										{
+											for (int j = xf + 1; j < xn; j++)
+											{
+												if (board_arr[i][j] != nullptr)
+												{
+													if (board_arr[i][j]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
+												}
+											}
+										}
+										if (elep_res == true)
+										{
+											if (board_arr[yn][xn] != nullptr)
+											{
+												if (board_arr[yn][xn]->get_name() == "b_K")
+												{
+													user.set_level(user.get_level() + 10);
+													game_result = true;
+													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
+												}
+											}
+											else
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = BLACK;
+												printf("Forward.\n");
+											}
+										}
+									}
+									// Diagonal Left-Down.
+									else if (xf > xn && yf < yn)
+									{
+										elep_res = true;
+										for (int i = yf + 1; i < yn; i++)
+										{
+											for (int j = xf - 1; j > xn; j--)
+											{
+												if (board_arr[i][j] != nullptr)
+												{
+													if (board_arr[i][j]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
+												}
+											}
+										}
+										if (elep_res == true)
+										{
+											if (board_arr[yn][xn] != nullptr)
+											{
+												if (board_arr[yn][xn]->get_name() == "b_K")
+												{
+													user.set_level(user.get_level() + 10);
+													game_result = true;
+													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
+												}
+											}
+											else
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = BLACK;
+												printf("Forward.\n");
+											}
+										}
+									}
+									// Diagonal Left.
+									else if (xf > xn && yf > yn)
+									{
+										elep_res = true;
+										for (int i = yf - 1; i > yn; i--)
+										{
+											for (int j = xf - 1; j > xn; j--)
+											{
+												if (board_arr[i][j] != nullptr)
+												{
+													if (board_arr[i][j]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
+												}
+											}
+										}
+										if (elep_res == true)
+										{
+											if (board_arr[yn][xn] != nullptr)
+											{
+												if (board_arr[yn][xn]->get_name() == "b_K")
+												{
+													user.set_level(user.get_level() + 10);
+													game_result = true;
+													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
+												}
+											}
+											else
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = BLACK;
+												printf("Forward.\n");
+											}
+										}
+									}
+									// Diagonal Right-Down.
+									else if (xn > xf && yf < yn)
+									{
+										elep_res = true;
+										for (int i = yf + 1; i < yn; i++)
+										{
+											for (int j = xf + 1; j < xn; j++)
+											{
+												if (board_arr[i][j] != nullptr)
+												{
+													if (board_arr[i][j]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
+												}
+											}
+										}
+										if (elep_res == true)
+										{
+											if (board_arr[yn][xn] != nullptr)
+											{
+												if (board_arr[yn][xn]->get_name() == "b_K")
+												{
+													user.set_level(user.get_level() + 10);
+													game_result = true;
+													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
+												}
+											}
+											else
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = BLACK;
+												printf("Forward.\n");
+											}
+										}
+									}
+								}
+								else if (board_arr[yf][xf]->get_name() == "w_r")
+								{
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if (board_arr[yn][xn] != nullptr)
+									{
+										if (board_arr[yn][xn]->get_color() == "white")
+										{
+											printf("You can't kill your figure.\n");
+										}
+									}
 									if (xf == xn)
 									{
-										if (yn >= 4)
+										rook_res = true;
+										if (yf > yn)
 										{
-											if (board_arr[yn][xn] == nullptr)
+											for (int i = yf - 1; i > yn; i--)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = BLACK;
-												press_to_continue();
-											}
-											else
-											{
-												cout << "This area is blocked by another figure." << endl;
-												press_to_continue();
-											}
-										}
-										else if (yn == (yf - 1))
-										{
-											if (board_arr[yn][xn] == nullptr)
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = BLACK;
-												press_to_continue();
-											}
-											else
-											{
-												cout << "This area is blocked by another figure." << endl;
-												press_to_continue();
-											}
-										}
-										else
-										{
-											cout << "Please try again with another position." << endl;
-											press_to_continue();
-										}
-									}
-									else
-									{
-										cout << "Something went wrong." << endl;
-										press_to_continue();
-									}
-								}
-								else if (board_arr[yn][yn]->get_color() == "white")
-								{
-									cout << "You can't go to this position." << endl;
-									press_to_continue();
-								}
-								else if (board_arr[yn][yn]->get_color() == "black")
-								{
-									if (xn == (xf + 1) && yn == (yf - 1)) // Right.
-									{
-										if (yn == 0)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
+												if (board_arr[i][xn] != nullptr)
 												{
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													board_arr[yn][xn] = &w_Q_temp;
-													board_arr[yf][xf] = nullptr;
-													player = BLACK;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
-													game_result = true;
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
 													break;
 												}
 											}
-											else
+											if (rook_res == true)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = BLACK;
-												press_to_continue();
-											}
-										}
-									}
-									else if (xn == (xf - 1) && yn == (yf - 1)) // Left.
-									{
-										if (yn == 0)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
+												if (board_arr[yn][xn] != nullptr)
 												{
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													board_arr[yn][xn] = &w_Q_temp;
-													board_arr[yf][xf] = nullptr;
-													player = BLACK;
-													press_to_continue();
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = BLACK;
+														printf("You kill black figure.\n");
+													}
 												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
-													game_result = true;
-													break;
-												}
-											}
-											else
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = BLACK;
-												press_to_continue();
-											}
-										}
-										else
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
+												else
 												{
 													board_arr[yn][xn] = board_arr[yf][xf];
 													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
 													player = BLACK;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
-													game_result = true;
-													break;
+													printf("Forward.\n");
 												}
 											}
-											else
+										}
+										else if (yf < yn)
+										{
+											for (int i = yf - 1; i > yn; i++)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = BLACK;
-												press_to_continue();
-											}
-										}
-									}
-									else
-									{
-										cout << "You can't kill this figure." << endl;
-										press_to_continue();
-									}
-								}
-								else
-								{
-									cout << "Err: Position Inputs." << endl;
-								}
-							}
-							else if (board_arr[yf][xf]->get_name() == "w_h")
-							{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_color() == "white")
-									{
-										cout << "You can't kill your figures." << endl;
-									}
-								}
-								// Up
-								if (xn == (xf + 1) && yn == (yf - 2))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "b_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = BLACK;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "b_K")
-										{
-											game_result = true;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = BLACK;
-										press_to_continue();
-									}
-								}
-								else if (xn == (xf - 1) && yn == (yf - 2))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "b_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = BLACK;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "b_K")
-										{
-											game_result = true;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = BLACK;
-										press_to_continue();
-									}
-								}
-								// Down
-								else if (xn == (xf + 1) && yn == (yf + 2))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "b_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = BLACK;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "b_K")
-										{
-											game_result = true;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = BLACK;
-										press_to_continue();
-									}
-								}
-								else if (xn == (xf - 1) && yn == (yf + 2))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "b_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = BLACK;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "b_K")
-										{
-											game_result = true;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = BLACK;
-										press_to_continue();
-									}
-								}
-								// Right
-								else if (xn == (xf + 2) && yn == (yf + 1))
-								{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_name() != "b_K")
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-										player = BLACK;
-										press_to_continue();
-									}
-									else if (board_arr[yn][xn]->get_name() == "b_K")
-									{
-										game_result = true;
-										break;
-									}
-								}
-								else
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = BLACK;
-									press_to_continue();
-								}
-								}
-								else if (xn == (xf + 2) && yn == (yf - 1))
-								{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_name() != "b_K")
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-										player = BLACK;
-										press_to_continue();
-									}
-									else if (board_arr[yn][xn]->get_name() == "b_K")
-									{
-										game_result = true;
-										break;
-									}
-								}
-								else
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = BLACK;
-									press_to_continue();
-								}
-								}
-								// Left
-								else if (xn == (xf - 2) && yn == (yf + 1))
-								{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_name() != "b_K")
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-										player = BLACK;
-										press_to_continue();
-									}
-									else if (board_arr[yn][xn]->get_name() == "b_K")
-									{
-										game_result = true;
-										break;
-									}
-								}
-								else
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = BLACK;
-									press_to_continue();
-								}
-								}
-								else if (xn == (xf - 2) && yn == (yf - 1))
-								{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_name() != "b_K")
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-										player = BLACK;
-										press_to_continue();
-									}
-									else if (board_arr[yn][xn]->get_name() == "b_K")
-									{
-										game_result = true;
-										break;
-									}
-								}
-								else
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = BLACK;
-									press_to_continue();
-								}
-								}
-								else 
-								{
-									cout << "Try again." << endl;
-								}
-							}
-							else if (board_arr[yf][xf]->get_name() == "w_e")
-							{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_color() == "white")
-									{
-										cout << "You can't kill your figures." << endl;
-									}
-								}
-								// Diagonal Right.
-								if (xn > xf && yf > yn)
-								{
-									elep_res = true;
-									for (int i = yf - 1; i > yn; i--)
-									{
-										for (int j = xf + 1; j < xn; j++)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "white")
+												if (board_arr[i][xn] != nullptr)
 												{
-													cout << "You can't kill your figures." << endl;
+													printf("Err: Wrong Position.\n");
 													rook_res = false;
 													break;
 												}
 											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_K")
+											if (rook_res == true)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = BLACK;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_K")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = BLACK;
-											press_to_continue();
-										}
-									}
-								}
-								// Diagonal Left-Down.
-								else if (xf > xn && yf < yn)
-								{
-									elep_res = true;
-									for (int i = yf + 1; i < yn; i++)
-									{
-										for (int j = xf - 1; j > xn; j--)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "white")
+												if (board_arr[yn][xn] != nullptr)
 												{
-													cout << "You can't kill your figures." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = BLACK;
+														printf("You kill black figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("Forward.\n");
 												}
 											}
 										}
 									}
-									if (elep_res == true)
+									else if (yf == yn)
 									{
-										if (board_arr[yn][xn] != nullptr)
+										rook_res = true;
+										if (xf > xn)
 										{
-											if (board_arr[yn][xn]->get_name() != "b_K")
+											for (int i = xf - 1; i > xn; i--)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = BLACK;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_K")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = BLACK;
-											press_to_continue();
-										}
-									}
-								}
-								// Diagonal Left.
-								else if (xf > xn && yf > yn)
-								{
-									elep_res = true;
-									for (int i = yf - 1; i > yn; i--)
-									{
-										for (int j = xf - 1; j > xn; j--)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "white")
+												if (board_arr[yn][i] != nullptr)
 												{
+													printf("Err: Wrong Position.\n");
 													rook_res = false;
 													break;
 												}
 											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_K")
+											if (rook_res == true)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = BLACK;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_K")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = BLACK;
-											press_to_continue();
-										}
-									}
-								}
-								// Diagonal Right-Down.
-								else if (xn > xf && yf < yn)
-								{
-									elep_res = true;
-									for (int i = yf + 1; i < yn; i++)
-									{
-										for (int j = xf + 1; j < xn; j++)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "white")
+												if (board_arr[yn][xn] != nullptr)
 												{
-													cout << "You can't kill your figures." << endl;
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = BLACK;
+														printf("You kill black figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("Forward.\n");
+												}
+											}
+										}
+										else if (xf < xn)
+										{
+											for (int i = xf - 1; i > xn; i++)
+											{
+												if (board_arr[yn][i] != nullptr)
+												{
+													printf("Err: Wrong Position.\n");
 													rook_res = false;
 													break;
 												}
 											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_K")
+											if (rook_res == true)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = BLACK;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_K")
-											{
-												game_result = true;
-												break;
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = BLACK;
+														printf("You kill black figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("Forward.\n");
+												}
 											}
 										}
 										else
 										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = BLACK;
-											press_to_continue();
+											printf("Err: Try again with another position.\n");
 										}
 									}
+									press_to_continue();
 								}
-								else
+								else if (board_arr[yf][xf]->get_name() == "w_Q")
 								{
-									cout << "Error." << endl;
-								}
-							}
-							else if (board_arr[yf][xf]->get_name() == "w_r")
-							{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_color() == "white")
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if (board_arr[yn][xn] != nullptr)
 									{
-										cout << "You can't kill your figures." << endl;
+										if (board_arr[yn][xn]->get_color() == "white")
+										{
+											cout << "You can't kill your figures." << endl;
+										}
 									}
-								}
-								if (xf == xn)
-								{
-									rook_res = true;
-									if (yf > yn)
+									else if (xn > xf && yf > yn)
 									{
+										elep_res = true;
 										for (int i = yf - 1; i > yn; i--)
 										{
-											if (board_arr[i][xn] != nullptr)
+											for (int j = xf + 1; j < xn; j++)
 											{
-												if (board_arr[i][xn]->get_color() == "white")
+												if (board_arr[i][j] != nullptr)
 												{
-													cout << "You can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[i][j]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
 												}
 											}
 										}
-										if (rook_res == true)
+										if (elep_res == true)
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
+												if (board_arr[yn][xn]->get_name() == "b_K")
 												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = BLACK;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
+													user.set_level(user.get_level() + 10);
 													game_result = true;
 													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
 												}
 											}
 											else
@@ -1004,40 +1022,46 @@ int main()
 												board_arr[yn][xn] = board_arr[yf][xf];
 												board_arr[yf][xf] = nullptr;
 												player = BLACK;
-												press_to_continue();
+												printf("Forward.\n");
 											}
 										}
 									}
-									else if (yf < yn)
+									// Diagonal Left-Down.
+									else if (xf > xn && yf < yn)
 									{
-										for (int i = yf - 1; i > yn; i++)
+										elep_res = true;
+										for (int i = yf + 1; i < yn; i++)
 										{
-											if (board_arr[i][xn] != nullptr)
+											for (int j = xf - 1; j > xn; j--)
 											{
-												if (board_arr[i][xn]->get_color() == "white")
+												if (board_arr[i][j] != nullptr)
 												{
-													cout << "You can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[i][j]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
 												}
 											}
 										}
-										if (rook_res == true)
+										if (elep_res == true)
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
+												if (board_arr[yn][xn]->get_name() == "b_K")
 												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = BLACK;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
+													user.set_level(user.get_level() + 10);
 													game_result = true;
 													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
 												}
 											}
 											else
@@ -1045,324 +1069,46 @@ int main()
 												board_arr[yn][xn] = board_arr[yf][xf];
 												board_arr[yf][xf] = nullptr;
 												player = BLACK;
-												press_to_continue();
+												printf("Forward.\n");
 											}
 										}
 									}
-								}
-								else if (yf == yn)
-								{
-									rook_res = true;
-									if (xf > xn)
+									// Diagonal Left.
+									else if (xf > xn && yf > yn)
 									{
-										for (int i = xf - 1; i > xn; i--)
-										{
-											if (board_arr[yn][i] != nullptr)
-											{
-												if (board_arr[yn][i]->get_color() == "white")
-												{
-													cout << "You can't kill your figure." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-										if (rook_res == true)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = BLACK;
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
-													game_result = true;
-													break;
-												}
-											}
-											else
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = BLACK;
-											}
-										}
-									}
-									else if (xf < xn)
-									{
-										for (int i = xf - 1; i > xn; i++)
-										{
-											if (board_arr[yn][i] != nullptr)
-											{
-												if (board_arr[yn][i]->get_color() == "white")
-												{
-													cout << "You can't kill your figure." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-										if (rook_res == true)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = BLACK;
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
-													game_result = true;
-													break;
-												}
-											}
-											else
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = BLACK;
-											}
-										}
-									}
-									else
-									{
-										cout << "Error." << endl;
-									}
-								}
-								press_to_continue();
-							}
-							else if (board_arr[yf][xf]->get_name() == "w_Q")
-							{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_color() == "white")
-									{
-										cout << "You can't kill your figures." << endl;
-									}
-								}
-								// Diagonal Right.
-								if (xn > xf && yf > yn)
-								{
-									elep_res = true;
-									for (int i = yf - 1; i > yn; i--)
-									{
-										for (int j = xf + 1; j < xn; j++)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "white")
-												{
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_K")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = BLACK;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_K")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = BLACK;
-											press_to_continue();
-										}
-									}
-								}
-								// Diagonal Left-Down.
-								else if (xf > xn && yf < yn)
-								{
-									elep_res = true;
-									for (int i = yf + 1; i < yn; i++)
-									{
-										for (int j = xf - 1; j > xn; j--)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "white")
-												{
-													cout << "You can't kill your figures." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_K")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = BLACK;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_K")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = BLACK;
-											press_to_continue();
-										}
-									}
-								}
-								// Diagonal Left.
-								else if (xf > xn && yf > yn)
-								{
-									elep_res = true;
-									for (int i = yf - 1; i > yn; i--)
-									{
-										for (int j = xf - 1; j > xn; j--)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "white")
-												{
-													cout << "You can't kill your figures." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_K")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = BLACK;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_K")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = BLACK;
-											press_to_continue();
-										}
-									}
-								}
-								// Diagonal Right-Down.
-								else if (xn > xf && yf < yn)
-								{
-									elep_res = true;
-									for (int i = yf + 1; i < yn; i++)
-									{
-										for (int j = xf + 1; j < xn; j++)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "white")
-												{
-													cout << "You can't kill your figures." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_K")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = BLACK;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_K")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = BLACK;
-											press_to_continue();
-										}
-									}
-								}
-								else if (xf == xn)
-								{
-									rook_res = true;
-									if (yf > yn)
-									{
+										elep_res = true;
 										for (int i = yf - 1; i > yn; i--)
 										{
-											if (board_arr[i][xn] != nullptr)
+											for (int j = xf - 1; j > xn; j--)
 											{
-												if (board_arr[i][xn]->get_color() == "white")
+												if (board_arr[i][j] != nullptr)
 												{
-													cout << "You can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[i][j]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
 												}
 											}
 										}
-										if (rook_res == true)
+										if (elep_res == true)
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
+												if (board_arr[yn][xn]->get_name() == "b_K")
 												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = BLACK;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
+													user.set_level(user.get_level() + 10);
 													game_result = true;
 													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
 												}
 											}
 											else
@@ -1370,40 +1116,46 @@ int main()
 												board_arr[yn][xn] = board_arr[yf][xf];
 												board_arr[yf][xf] = nullptr;
 												player = BLACK;
-												press_to_continue();
+												printf("Forward.\n");
 											}
 										}
 									}
-									else if (yf < yn)
+									// Diagonal Right-Down.
+									else if (xn > xf && yf < yn)
 									{
-										for (int i = yf - 1; i > yn; i++)
+										elep_res = true;
+										for (int i = yf + 1; i < yn; i++)
 										{
-											if (board_arr[i][xn] != nullptr)
+											for (int j = xf + 1; j < xn; j++)
 											{
-												if (board_arr[i][xn]->get_color() == "white")
+												if (board_arr[i][j] != nullptr)
 												{
-													cout << "You can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[i][j]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
 												}
 											}
 										}
-										if (rook_res == true)
+										if (elep_res == true)
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
+												if (board_arr[yn][xn]->get_name() == "b_K")
 												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = BLACK;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
+													user.set_level(user.get_level() + 10);
 													game_result = true;
 													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
 												}
 											}
 											else
@@ -1411,829 +1163,862 @@ int main()
 												board_arr[yn][xn] = board_arr[yf][xf];
 												board_arr[yf][xf] = nullptr;
 												player = BLACK;
-												press_to_continue();
+												printf("Forward.\n");
 											}
 										}
 									}
-								}
-								else if (yf == yn)
-								{
-									rook_res = true;
-									if (xf > xn)
+									else if (xf == xn)
 									{
-										for (int i = xf - 1; i > xn; i--)
+										rook_res = true;
+										if (yf > yn)
 										{
-											if (board_arr[yn][i] != nullptr)
+											for (int i = yf - 1; i > yn; i--)
 											{
-												if (board_arr[yn][i]->get_color() == "white")
+												if (board_arr[i][xn] != nullptr)
 												{
-													cout << "You can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[i][xn]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														rook_res = false;
+														break;
+													}
 												}
 											}
-										}
-										if (rook_res == true)
-										{
-											if (board_arr[yn][xn] != nullptr)
+											if (rook_res == true)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = BLACK;
+														printf("You kill black figure.\n");
+													}
+												}
+												else
 												{
 													board_arr[yn][xn] = board_arr[yf][xf];
 													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
 													player = BLACK;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
-													game_result = true;
-													break;
-												}
-											}
-											else
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = BLACK;
-												press_to_continue();
-											}
-										}
-									}
-									else if (xf < xn)
-									{
-										for (int i = xf - 1; i > xn; i++)
-										{
-											if (board_arr[yn][i] != nullptr)
-											{
-												if (board_arr[yn][i]->get_color() == "white")
-												{
-													cout << "You can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													printf("Forward.\n");
 												}
 											}
 										}
-										if (rook_res == true)
+										else if (yf < yn)
 										{
-											if (board_arr[yn][xn] != nullptr)
+											for (int i = yf - 1; i > yn; i++)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_K")
+												if (board_arr[i][xn] != nullptr)
+												{
+													if (board_arr[i][xn]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														rook_res = false;
+														break;
+													}
+												}
+											}
+											if (rook_res == true)
+											{
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = BLACK;
+														printf("You kill black figure.\n");
+													}
+												}
+												else
 												{
 													board_arr[yn][xn] = board_arr[yf][xf];
 													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
 													player = BLACK;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_K")
-												{
-													game_result = true;
-													break;
+													printf("Forward.\n");
 												}
 											}
-											else
+										}
+									}
+									else if (yf == yn)
+									{
+										rook_res = true;
+										if (xf > xn)
+										{
+											for (int i = xf - 1; i > xn; i--)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = BLACK;
-												press_to_continue();
+												if (board_arr[yn][i] != nullptr)
+												{
+													if (board_arr[yn][i]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														rook_res = false;
+														break;
+													}
+												}
+											}
+											if (rook_res == true)
+											{
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = BLACK;
+														printf("You kill black figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("Forward.\n");
+												}
+											}
+										}
+										else if (xf < xn)
+										{
+											for (int i = xf - 1; i > xn; i++)
+											{
+												if (board_arr[yn][i] != nullptr)
+												{
+													if (board_arr[yn][i]->get_color() == "white")
+													{
+														printf("You can't kill your figures.\n");
+														rook_res = false;
+														break;
+													}
+												}
+											}
+											if (rook_res == true)
+											{
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "b_K")
+													{
+														user.set_level(user.get_level() + 10);
+														game_result = true;
+														break;
+													}
+													else
+													{
+														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = BLACK;
+														printf("You kill black figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("Forward.\n");
+												}
 											}
 										}
 									}
 								}
-							}
-							else if (board_arr[yf][xf]->get_name() == "w_K")
-							{
-								if (board_arr[yn][xn] != nullptr)
+								else if (board_arr[yf][xf]->get_name() == "w_K")
 								{
-									if (board_arr[yn][xn]->get_color() == "white")
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if ((yf == yn && xn == (xf + 1)) || (yf == yn && xn == (xf - 1)) || (xf == xn && yn == (yf + 1)) || (xf == xn && yn == (yf - 1)) || (xn == (xf + 1) && yn == (yf + 1)) || (xn == (xf + 1) && yn == (yf - 1)) || (xn == (xf - 1) && yn == (yf + 1)) || (xn == (xf - 1) && yn == (yf - 1)))
 									{
-										cout << "You can't kill your figure." << endl;
+										if (board_arr[yn][xn] == nullptr)
+										{
+											board_arr[yn][xn] = board_arr[yf][xf];
+											board_arr[yf][xf] = nullptr;
+											player = BLACK;
+											printf("Forward.\n");
+											press_to_continue();
+										}
+										else
+										{
+											if (board_arr[yn][xn]->get_color() == "white")
+											{
+												printf("Err: You can't kill your figures.\n");
+												press_to_continue();
+											}
+											else
+											{
+												if (board_arr[yn][xn]->get_name() == "b_K")
+												{
+													user.set_level(user.get_level() + 10);
+													game_result = true;
+													break;
+												}
+												else
+												{
+													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = BLACK;
+													printf("You kill black figure.\n");
+													press_to_continue();
+												}
+											}
+										}
 									}
-								}
-								if (yf == yn)
-								{
-									if ((xn == xf - 1) && xn > xf)
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = BLACK;
-										press_to_continue();
-									}
-									else if ((xn == xf + 1) && xf < xn)
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = BLACK;
-										press_to_continue();
-									}
-									else
-									{
-										cout << "Error." << endl;
-									}
-								}
-								else if (xf == xn)
-								{
-									if ((yn == yf - 1) && yf > yn)
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = BLACK;
-										press_to_continue();
-									}
-									else if ((yn == yf - 1) && yf > yn)
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = BLACK;
-										press_to_continue();
-									}
-									else
-									{
-										cout << "Error." << endl;
-									}
-								}
-								else if (xn == (xf + 1) && yn == (yf + 1))
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = BLACK;
-									press_to_continue();
-								}
-								else if (xn == (xf + 1) && yn == (yf - 1))
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = BLACK;
-									press_to_continue();
-								}
-								else if (xn == (xf - 1) && yn == (yf + 1))
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = BLACK;
-									press_to_continue();
-								}
-								else if (xn == (xf - 1) && yn == (yf - 1))
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = BLACK;
-									press_to_continue();
-								}
-								else
-								{
-									cout << "Error." << endl;
 								}
 							}
 							else
 							{
-								cout << "Err: WHITE FIGURE CHOOSE SOLUTION." << endl;
+								printf("Err: Your choose is wrong (nullptr).\n");
 								press_to_continue();
 							}
 						}
 						else if (player == BLACK)
 						{
+							printf("\n\t\BLACK: \n");
+							printf("\t\tchoose figure [ex: e2] --> ");
+							cin >> coor[0];
+							cin >> coor[1];
+							xf = 0;
+							yf = 0;
+							xn = 0;
+							xf = 0;
+							xf = lti(coor, 0);
+							yf = ltl(coor, 1);
 							
-							cout << "TURN: BLACK" << endl << endl;
-							cout << "enter figure position (ex: a 7) --> ";
-							cin >> coor[0];	cin >> coor[1];
-
-							cout << "enter next position (ex: a 6) --> ";
-							cin >> coor[2];	cin >> coor[3];
-
-							xf = 0; yf = 0; xn = 0; yn = 0;
-							xf = lti(coor, 0); yf = ltl(coor, 1); xn = lti(coor, 2); yn = ltl(coor, 3);
-
-							if (board_arr[yf][xf]->get_name() == "b_p")
+							/*
+										BLACK
+							*/
+							if (board_arr[yf][xf] != nullptr)
 							{
-								if (board_arr[yn][yn] == nullptr)
+								if (board_arr[yf][xf]->get_name() == "b_p")
 								{
+									printf("\t\t\tchoose position [ex: b2] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if (board_arr[yf][xf]->get_first_action() == false)
+									{
+										if ((xn == xf && yn == (yf + 1)) || (xn == xf && yn == (yf + 2)))
+										{
+											if (board_arr[yn][xn] == nullptr)
+											{
+												board_arr[yf][xf]->set_first_action(true);
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = WHITE;
+												printf("Foward.\n");
+												press_to_continue();
+											}
+											else
+											{
+												printf("Err: Position is blocked.");
+												press_to_continue();
+											}
+										}
+										else if ((yn == (yf + 1) && xn == (xf - 1)) || (yn == (yf + 1) && xn == (xf + 1)))
+										{
+											if (board_arr[yn][xn] == nullptr)
+											{
+												printf("Err: You can't go to this positon because on this position no figures.\n");
+												press_to_continue();
+											}
+											else
+											{
+												if (board_arr[yn][xn]->get_color() == "black")
+												{
+													printf("Err: You can't kill your figures.\n");
+													press_to_continue();
+												}
+												else
+												{
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														if (yn == 7)
+														{
+															board_arr[yn][xn] = &b_Q_temp;
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+														}
+														printf("Right & Left.\n");
+														press_to_continue();
+													}
+												}
+											}
+										}
+									}
+									else if (board_arr[yf][xf]->get_first_action() == true)
+									{
+										if (xn == xf && yn == (yf + 1))
+										{
+											if (board_arr[yn][xn] == nullptr)
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = WHITE;
+												printf("Foward.\n");
+												press_to_continue();
+											}
+											else
+											{
+												printf("Err: Position is blocked.");
+												press_to_continue();
+											}
+										}
+										else if ((yn == (yf + 1) && xn == (xf - 1)) || (yn == (yf + 1) && xn == (xf + 1)))
+										{
+											if (board_arr[yn][xn] == nullptr)
+											{
+												printf("You can't go to this positon because on this position no figures.\n");
+												press_to_continue();
+											}
+											else
+											{
+												if (board_arr[yn][xn]->get_color() == "black")
+												{
+													printf("Err: You can't kill your figures.\n");
+													press_to_continue();
+												}
+												else
+												{
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														if (yn == 7)
+														{
+															board_arr[yn][xn] = &b_Q_temp;
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+														}
+														printf("Right & Left.\n");
+														press_to_continue();
+													}
+												}
+											}
+										}
+									}
+									else
+									{
+										printf("Err: Pawn first_action not false & true.\n");
+										press_to_continue();
+									}
+								}
+								else if (board_arr[yf][xf]->get_name() == "b_h")
+								{
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if ((yn == (yf - 2) && xn == (xf - 1)) || (yn == (yf - 2) && xn == (xf + 1)) || (yn == (yf + 2) && xn == (xf - 1)) || (yn == (yf + 2) && xn == (xf + 1)) || (yn == (yf - 1) && xn == (xf - 2)) || (yn == (yf + 1) && xn == (xf - 2)) || (yn == (yf - 1) && xn == (xf + 2)) || (yn == (yf + 1) && xn == (xf + 2)))
+									{
+										if (board_arr[yn][xn] == nullptr)
+										{
+											board_arr[yn][xn] = board_arr[yf][xf];
+											board_arr[yf][xf] = nullptr;
+											player = WHITE;
+											printf("Forward.\n");
+											press_to_continue();
+										}
+										else
+										{
+											if (board_arr[yn][xn]->get_color() == "black")
+											{
+												printf("Err: You can't kill your figures.\n");
+												press_to_continue();
+											}
+											else
+											{
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = false;
+													break;
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("You kill white figure.\n");
+													press_to_continue();
+												}
+											}
+										}
+									}
+								}
+								else if (board_arr[yf][xf]->get_name() == "b_e")
+								{
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if (xn > xf && yf > yn)
+									{
+										elep_res = true;
+										for (int i = yf - 1; i > yn; i--)
+										{
+											for (int j = xf + 1; j < xn; j++)
+											{
+												if (board_arr[i][j] != nullptr)
+												{
+													if (board_arr[i][j]->get_color() == "black")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
+												}
+											}
+										}
+										if (elep_res == true)
+										{
+											if (board_arr[yn][xn] != nullptr)
+											{
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = false;
+													break;
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("You kill white figure.\n");
+												}
+											}
+											else
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = WHITE;
+												printf("Forward.\n");
+											}
+										}
+									}
+									// Diagonal Left-Down.
+									else if (xf > xn && yf < yn)
+									{
+										elep_res = true;
+										for (int i = yf + 1; i < yn; i++)
+										{
+											for (int j = xf - 1; j > xn; j--)
+											{
+												if (board_arr[i][j] != nullptr)
+												{
+													if (board_arr[i][j]->get_color() == "black")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
+												}
+											}
+										}
+										if (elep_res == true)
+										{
+											if (board_arr[yn][xn] != nullptr)
+											{
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = false;
+													break;
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("You kill white figure.\n");
+												}
+											}
+											else
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = WHITE;
+												printf("Forward.\n");
+											}
+										}
+									}
+									// Diagonal Left.
+									else if (xf > xn && yf > yn)
+									{
+										elep_res = true;
+										for (int i = yf - 1; i > yn; i--)
+										{
+											for (int j = xf - 1; j > xn; j--)
+											{
+												if (board_arr[i][j] != nullptr)
+												{
+													if (board_arr[i][j]->get_color() == "black")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
+												}
+											}
+										}
+										if (elep_res == true)
+										{
+											if (board_arr[yn][xn] != nullptr)
+											{
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = false;
+													break;
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("You kill white figure.\n");
+												}
+											}
+											else
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = WHITE;
+												printf("Forward.\n");
+											}
+										}
+									}
+									// Diagonal Right-Down.
+									else if (xn > xf && yf < yn)
+									{
+										elep_res = true;
+										for (int i = yf + 1; i < yn; i++)
+										{
+											for (int j = xf + 1; j < xn; j++)
+											{
+												if (board_arr[i][j] != nullptr)
+												{
+													if (board_arr[i][j]->get_color() == "black")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
+												}
+											}
+										}
+										if (elep_res == true)
+										{
+											if (board_arr[yn][xn] != nullptr)
+											{
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = false;
+													break;
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("You kill white figure.\n");
+												}
+											}
+											else
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = WHITE;
+												printf("Forward.\n");
+											}
+										}
+									}
+								}
+								else if (board_arr[yf][xf]->get_name() == "b_r")
+								{
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if (board_arr[yn][xn] != nullptr)
+									{
+										if (board_arr[yn][xn]->get_color() == "black")
+										{
+											printf("You can't kill your figure.\n");
+										}
+									}
 									if (xf == xn)
 									{
-										if (yn <= 4)
+										rook_res = true;
+										if (yf > yn)
 										{
-											if (board_arr[yn][xn] == nullptr)
+											for (int i = yf - 1; i > yn; i--)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-												press_to_continue();
-											}
-											else
-											{
-												cout << "This area is blocked by another figure." << endl;
-												press_to_continue();
-											}
-										}
-										else if (yn == (yf - 1))
-										{
-											if (board_arr[yn][xn] == nullptr)
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-												press_to_continue();
-											}
-											else
-											{
-												cout << "This area is blocked by another figure." << endl;
-												press_to_continue();
-											}
-										}
-									}
-								}
-								else if (board_arr[yn][yn]->get_color() == "black")
-								{
-									cout << "You can't go to this position." << endl;
-									press_to_continue();
-								}
-								else
-								{
-									if (xn == (xf + 1) && yn == (yf + 1)) // Right.
-									{
-										if (yn == 0)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "w_K")
+												if (board_arr[i][xn] != nullptr)
 												{
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													board_arr[yn][xn] = &b_Q_temp;
-													board_arr[yf][xf] = nullptr;
-													player = WHITE;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "w_K")
-												{
-													game_result = false;
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
 													break;
 												}
 											}
-											else
+											if (rook_res == true)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-												press_to_continue();
-											}
-										}
-										else
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "w_K")
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
+												}
+												else
 												{
 													board_arr[yn][xn] = board_arr[yf][xf];
 													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
 													player = WHITE;
-													press_to_continue();
+													printf("Forward.\n");
 												}
-												else if (board_arr[yn][xn]->get_name() == "w_K")
+											}
+										}
+										else if (yf < yn)
+										{
+											for (int i = yf - 1; i > yn; i++)
+											{
+												if (board_arr[i][xn] != nullptr)
 												{
-													game_result = false;
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
 													break;
 												}
 											}
-											else
+											if (rook_res == true)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-												press_to_continue();
-											}
-										}
-									}
-									else if (xn == (xf - 1) && yn == (yf + 1)) // Left.
-									{
-										if (yn == 0)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "w_K")
+												if (board_arr[yn][xn] != nullptr)
 												{
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													board_arr[yn][xn] = &b_Q_temp;
-													board_arr[yf][xf] = nullptr;
-													player = WHITE;
-													press_to_continue();
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
 												}
-												else if (board_arr[yn][xn]->get_name() == "w_K")
-												{
-													game_result = false;
-													break;
-												}
-											}
-											else
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-												press_to_continue();
-											}
-										}
-										else
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "w_K")
+												else
 												{
 													board_arr[yn][xn] = board_arr[yf][xf];
 													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
 													player = WHITE;
-													press_to_continue();
+													printf("Forward.\n");
 												}
-												else if (board_arr[yn][xn]->get_name() == "w_K")
+											}
+										}
+									}
+									else if (yf == yn)
+									{
+										rook_res = true;
+										if (xf > xn)
+										{
+											for (int i = xf - 1; i > xn; i--)
+											{
+												if (board_arr[yn][i] != nullptr)
 												{
-													game_result = false;
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
 													break;
 												}
 											}
-											else
+											if (rook_res == true)
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-												press_to_continue();
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("Forward.\n");
+												}
 											}
 										}
-									}
-									else
-									{
-										cout << "You can't kill this figure." << endl;
-										press_to_continue();
-									}
-								}
-							}
-							else if (board_arr[yf][xf]->get_name() == "b_h")
-							{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_color() == "black")
-									{
-										cout << "you can't kill your figures." << endl;
-									}
-								}
-								// up
-								if (xn == (xf + 1) && yn == (yf - 2))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "w_K")
+										else if (xf < xn)
 										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = WHITE;
-											press_to_continue();
+											for (int i = xf - 1; i > xn; i++)
+											{
+												if (board_arr[yn][i] != nullptr)
+												{
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
+													break;
+												}
+											}
+											if (rook_res == true)
+											{
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("Forward.\n");
+												}
+											}
 										}
-										else if (board_arr[yn][xn]->get_name() == "w_K")
+										else
 										{
-											game_result = false;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										press_to_continue();
-									}
-								}
-								else if (xn == (xf - 1) && yn == (yf - 2))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "w_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = WHITE;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "w_K")
-										{
-											game_result = false;
-											break;
+											printf("Err: Try again with another position.\n");
 										}
 									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										press_to_continue();
-									}
-								}
-								// down
-								else if (xn == (xf + 1) && yn == (yf + 2))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "w_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = WHITE;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "w_K")
-										{
-											game_result = false;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										press_to_continue();
-									}
-								}
-								else if (xn == (xf - 1) && yn == (yf + 2))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "w_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = WHITE;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "w_K")
-										{
-											game_result = false;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										press_to_continue();
-									}
-								}
-								// right
-								else if (xn == (xf + 2) && yn == (yf + 1))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "w_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = WHITE;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "w_K")
-										{
-											game_result = false;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										press_to_continue();
-									}
-								}
-								else if (xn == (xf + 2) && yn == (yf - 1))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "w_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = WHITE;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "w_K")
-										{
-											game_result = false;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										press_to_continue();
-									}
-								}
-								// left
-								else if (xn == (xf - 2) && yn == (yf + 1))
-								{
-									if (board_arr[yn][xn] != nullptr)
-									{
-										if (board_arr[yn][xn]->get_name() != "w_K")
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-											player = WHITE;
-											press_to_continue();
-										}
-										else if (board_arr[yn][xn]->get_name() == "w_K")
-										{
-											game_result = false;
-											break;
-										}
-									}
-									else
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										press_to_continue();
-									}
-								}
-								else if (xn == (xf - 2) && yn == (yf - 1))
-								{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_name() != "w_K")
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-										player = WHITE;
-										press_to_continue();
-									}
-									else if (board_arr[yn][xn]->get_name() == "w_K")
-									{
-										game_result = false;
-										break;
-									}
-								}
-								else
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = WHITE;
 									press_to_continue();
 								}
-								}
-								else 
+								else if (board_arr[yf][xf]->get_name() == "b_Q")
 								{
-									cout << "try again." << endl;
-								}
-							}
-							else if (board_arr[yf][xf]->get_name() == "b_e")
-							{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_color() == "black")
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
+
+									printf("RESULT:");
+
+									if (board_arr[yn][xn] != nullptr)
 									{
-										cout << "you can't kill your figures." << endl;
-									}
-								}
-								// diagonal right.
-								if (xn > xf && yf > yn)
-								{
-									elep_res = true;
-									for (int i = yf - 1; i > yn; i--)
-									{
-										for (int j = xf + 1; j < xn; j++)
+										if (board_arr[yn][xn]->get_color() == "black")
 										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "black")
-												{
-													cout << "you can't kill your figures." << endl;
-													rook_res = false;
-													break;
-												}
-											}
+											cout << "You can't kill your figures." << endl;
 										}
 									}
-									if (elep_res == true)
+									else if (xn > xf && yf > yn)
 									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_k")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = WHITE;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_k")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = WHITE;
-											press_to_continue();
-										}
-									}
-								}
-								// diagonal left-down.
-								else if (xf > xn && yf < yn)
-								{
-									elep_res = true;
-									for (int i = yf + 1; i < yn; i++)
-									{
-										for (int j = xf - 1; j > xn; j--)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "black")
-												{
-													cout << "you can't kill your figures." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_k")
-											{
-												
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = WHITE;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_k")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = WHITE;
-											press_to_continue();
-										}
-									}
-								}
-								// diagonal left.
-								else if (xf > xn && yf > yn)
-								{
-									elep_res = true;
-									for (int i = yf - 1; i > yn; i--)
-									{
-										for (int j = xf - 1; j > xn; j--)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "black")
-												{
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_k")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = WHITE;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_k")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = WHITE;
-											press_to_continue();
-										}
-									}
-								}
-								// diagonal right-down.
-								else if (xn > xf && yf < yn)
-								{
-									elep_res = true;
-									for (int i = yf + 1; i < yn; i++)
-									{
-										for (int j = xf + 1; j < xn; j++)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "black")
-												{
-													cout << "you can't kill your figures." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_k")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = WHITE;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_k")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = WHITE;
-											press_to_continue();
-										}
-									}
-								}
-								else
-								{
-									cout << "error." << endl;
-								}
-							}
-							else if (board_arr[yf][xf]->get_name() == "b_r")
-							{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_color() == "black")
-									{
-										cout << "you can't kill your figures." << endl;
-									}
-								}
-								if (xf == xn)
-								{
-									rook_res = true;
-									if (yf > yn)
-									{
+										elep_res = true;
 										for (int i = yf - 1; i > yn; i--)
 										{
-											if (board_arr[i][xn] != nullptr)
+											for (int j = xf + 1; j < xn; j++)
 											{
-												if (board_arr[i][xn]->get_color() == "black")
+												if (board_arr[i][j] != nullptr)
 												{
-													cout << "you can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[i][j]->get_color() == "black")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
 												}
 											}
 										}
-										if (rook_res == true)
+										if (elep_res == true)
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_k")
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = false;
+													break;
+												}
+												else
 												{
 													board_arr[yn][xn] = board_arr[yf][xf];
 													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
 													player = WHITE;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_k")
-												{
-													game_result = true;
-													break;
+													printf("You kill white figure.\n");
 												}
 											}
 											else
@@ -2241,40 +2026,44 @@ int main()
 												board_arr[yn][xn] = board_arr[yf][xf];
 												board_arr[yf][xf] = nullptr;
 												player = WHITE;
-												press_to_continue();
+												printf("Forward.\n");
 											}
 										}
 									}
-									else if (yf < yn)
+									// Diagonal Left-Down.
+									else if (xf > xn && yf < yn)
 									{
-										for (int i = yf - 1; i > yn; i++)
+										elep_res = true;
+										for (int i = yf + 1; i < yn; i++)
 										{
-											if (board_arr[i][xn] != nullptr)
+											for (int j = xf - 1; j > xn; j--)
 											{
-												if (board_arr[i][xn]->get_color() == "black")
+												if (board_arr[i][j] != nullptr)
 												{
-													cout << "you can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[i][j]->get_color() == "black")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
 												}
 											}
 										}
-										if (rook_res == true)
+										if (elep_res == true)
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_k")
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = false;
+													break;
+												}
+												else
 												{
 													board_arr[yn][xn] = board_arr[yf][xf];
 													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
 													player = WHITE;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_k")
-												{
-													game_result = true;
-													break;
+													printf("You kill white figure.\n");
 												}
 											}
 											else
@@ -2282,324 +2071,44 @@ int main()
 												board_arr[yn][xn] = board_arr[yf][xf];
 												board_arr[yf][xf] = nullptr;
 												player = WHITE;
-												press_to_continue();
+												printf("Forward.\n");
 											}
 										}
 									}
-								}
-								else if (yf == yn)
-								{
-									rook_res = true;
-									if (xf > xn)
+									// Diagonal Left.
+									else if (xf > xn && yf > yn)
 									{
-										for (int i = xf - 1; i > xn; i--)
-										{
-											if (board_arr[yn][i] != nullptr)
-											{
-												if (board_arr[yn][i]->get_color() == "black")
-												{
-													cout << "you can't kill your figure." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-										if (rook_res == true)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "b_k")
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = WHITE;
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_k")
-												{
-													game_result = true;
-													break;
-												}
-											}
-											else
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-											}
-										}
-									}
-									else if (xf < xn)
-									{
-										for (int i = xf - 1; i > xn; i++)
-										{
-											if (board_arr[yn][i] != nullptr)
-											{
-												if (board_arr[yn][i]->get_color() == "black")
-												{
-													cout << "you can't kill your figure." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-										if (rook_res == true)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "b_k")
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = WHITE;
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_k")
-												{
-													game_result = true;
-													break;
-												}
-											}
-											else
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-											}
-										}
-									}
-									else
-									{
-										cout << "error." << endl;
-									}
-								}
-								press_to_continue();
-							}
-							else if (board_arr[yf][xf]->get_name() == "b_Q")
-							{
-								if (board_arr[yn][xn] != nullptr)
-								{
-									if (board_arr[yn][xn]->get_color() == "black")
-									{
-										cout << "you can't kill your figures." << endl;
-									}
-								}
-								// diagonal right.
-								if (xn > xf && yf > yn)
-								{
-									elep_res = true;
-									for (int i = yf - 1; i > yn; i--)
-									{
-										for (int j = xf + 1; j < xn; j++)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "black")
-												{
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_k")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = WHITE;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_k")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = WHITE;
-											press_to_continue();
-										}
-									}
-								}
-								// diagonal left-down.
-								else if (xf > xn && yf < yn)
-								{
-									elep_res = true;
-									for (int i = yf + 1; i < yn; i++)
-									{
-										for (int j = xf - 1; j > xn; j--)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "black")
-												{
-													cout << "you can't kill your figures." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_k")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = WHITE;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_k")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = WHITE;
-											press_to_continue();
-										}
-									}
-								}
-								// diagonal left.
-								else if (xf > xn && yf > yn)
-								{
-									elep_res = true;
-									for (int i = yf - 1; i > yn; i--)
-									{
-										for (int j = xf - 1; j > xn; j--)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "black")
-												{
-													cout << "you can't kill your figures." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_k")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = WHITE;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_k")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = WHITE;
-											press_to_continue();
-										}
-									}
-								}
-								// diagonal right-down.
-								else if (xn > xf && yf < yn)
-								{
-									elep_res = true;
-									for (int i = yf + 1; i < yn; i++)
-									{
-										for (int j = xf + 1; j < xn; j++)
-										{
-											if (board_arr[i][j] != nullptr)
-											{
-												if (board_arr[i][j]->get_color() == "black")
-												{
-													cout << "you can't kill your figures." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-									}
-									if (elep_res == true)
-									{
-										if (board_arr[yn][xn] != nullptr)
-										{
-											if (board_arr[yn][xn]->get_name() != "b_k")
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-												player = WHITE;
-												press_to_continue();
-											}
-											else if (board_arr[yn][xn]->get_name() == "b_k")
-											{
-												game_result = true;
-												break;
-											}
-										}
-										else
-										{
-											board_arr[yn][xn] = board_arr[yf][xf];
-											board_arr[yf][xf] = nullptr;
-											player = WHITE;
-											press_to_continue();
-										}
-									}
-								}
-								else if (xf == xn)
-								{
-									rook_res = true;
-									if (yf > yn)
-									{
+										elep_res = true;
 										for (int i = yf - 1; i > yn; i--)
 										{
-											if (board_arr[i][xn] != nullptr)
+											for (int j = xf - 1; j > xn; j--)
 											{
-												if (board_arr[i][xn]->get_color() == "black")
+												if (board_arr[i][j] != nullptr)
 												{
-													cout << "you can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[i][j]->get_color() == "black")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
 												}
 											}
 										}
-										if (rook_res == true)
+										if (elep_res == true)
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_k")
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = false;
+													break;
+												}
+												else
 												{
 													board_arr[yn][xn] = board_arr[yf][xf];
 													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
 													player = WHITE;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_k")
-												{
-													game_result = true;
-													break;
+													printf("You kill white figure.\n");
 												}
 											}
 											else
@@ -2607,40 +2116,44 @@ int main()
 												board_arr[yn][xn] = board_arr[yf][xf];
 												board_arr[yf][xf] = nullptr;
 												player = WHITE;
-												press_to_continue();
+												printf("Forward.\n");
 											}
 										}
 									}
-									else if (yf < yn)
+									// Diagonal Right-Down.
+									else if (xn > xf && yf < yn)
 									{
-										for (int i = yf - 1; i > yn; i++)
+										elep_res = true;
+										for (int i = yf + 1; i < yn; i++)
 										{
-											if (board_arr[i][xn] != nullptr)
+											for (int j = xf + 1; j < xn; j++)
 											{
-												if (board_arr[i][xn]->get_color() == "black")
+												if (board_arr[i][j] != nullptr)
 												{
-													cout << "you can't kill your figure." << endl;
-													rook_res = false;
-													break;
+													if (board_arr[i][j]->get_color() == "black")
+													{
+														printf("You can't kill your figures.\n");
+														elep_res = false;
+														break;
+													}
 												}
 											}
 										}
-										if (rook_res == true)
+										if (elep_res == true)
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() != "b_k")
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = false;
+													break;
+												}
+												else
 												{
 													board_arr[yn][xn] = board_arr[yf][xf];
 													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
 													player = WHITE;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_k")
-												{
-													game_result = true;
-													break;
+													printf("You kill white figure.\n");
 												}
 											}
 											else
@@ -2648,185 +2161,217 @@ int main()
 												board_arr[yn][xn] = board_arr[yf][xf];
 												board_arr[yf][xf] = nullptr;
 												player = WHITE;
-												press_to_continue();
+												printf("Forward.\n");
+											}
+										}
+									}
+									else if (xf == xn)
+									{
+										rook_res = true;
+										if (yf > yn)
+										{
+											for (int i = yf - 1; i > yn; i--)
+											{
+												if (board_arr[i][xn] != nullptr)
+												{
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
+													break;
+												}
+											}
+											if (rook_res == true)
+											{
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("Forward.\n");
+												}
+											}
+										}
+										else if (yf < yn)
+										{
+											for (int i = yf - 1; i > yn; i++)
+											{
+												if (board_arr[i][xn] != nullptr)
+												{
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
+													break;
+												}
+											}
+											if (rook_res == true)
+											{
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("Forward.\n");
+												}
+											}
+										}
+									}
+									else if (yf == yn)
+									{
+										rook_res = true;
+										if (xf > xn)
+										{
+											for (int i = xf - 1; i > xn; i--)
+											{
+												if (board_arr[yn][i] != nullptr)
+												{
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
+													break;
+												}
+											}
+											if (rook_res == true)
+											{
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("Forward.\n");
+												}
+											}
+										}
+										else if (xf < xn)
+										{
+											for (int i = xf - 1; i > xn; i++)
+											{
+												if (board_arr[yn][i] != nullptr)
+												{
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
+													break;
+												}
+											}
+											if (rook_res == true)
+											{
+												if (board_arr[yn][xn] != nullptr)
+												{
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("Forward.\n");
+												}
 											}
 										}
 									}
 								}
-								else if (yf == yn)
+								else if (board_arr[yf][xf]->get_name() == "b_K")
 								{
-									rook_res = true;
-									if (xf > xn)
-									{
-										for (int i = xf - 1; i > xn; i--)
-										{
-											if (board_arr[yn][i] != nullptr)
-											{
-												if (board_arr[yn][i]->get_color() == "black")
-												{
-													cout << "you can't kill your figure." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-										if (rook_res == true)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "b_k")
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = WHITE;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_k")
-												{
-													game_result = true;
-													break;
-												}
-											}
-											else
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-												press_to_continue();
-											}
-										}
-									}
-									else if (xf < xn)
-									{
-										for (int i = xf - 1; i > xn; i++)
-										{
-											if (board_arr[yn][i] != nullptr)
-											{
-												if (board_arr[yn][i]->get_color() == "black")
-												{
-													cout << "you can't kill your figure." << endl;
-													rook_res = false;
-													break;
-												}
-											}
-										}
-										if (rook_res == true)
-										{
-											if (board_arr[yn][xn] != nullptr)
-											{
-												if (board_arr[yn][xn]->get_name() != "b_k")
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-													player = WHITE;
-													press_to_continue();
-												}
-												else if (board_arr[yn][xn]->get_name() == "b_k")
-												{
-													game_result = true;
-													break;
-												}
-											}
-											else
-											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-												press_to_continue();
-											}
-										}
-									}
-								}
-							}
-							else if (board_arr[yf][xf]->get_name() == "b_K")
-							{
-								if (board_arr[yn][xn] != nullptr)
+								printf("\t\t\tchoose position [ex: e5] --> ");
+								cin >> coor[2];
+								cin >> coor[3];
+								xn = lti(coor, 2);
+								yn = ltl(coor, 3);
+
+								printf("RESULT:");
+
+								if ((yf == yn && xn == (xf + 1)) || (yf == yn && xn == (xf - 1)) || (xf == xn && yn == (yf + 1)) || (xf == xn && yn == (yf - 1)) || (xn == (xf + 1) && yn == (yf + 1)) || (xn == (xf + 1) && yn == (yf - 1)) || (xn == (xf - 1) && yn == (yf + 1)) || (xn == (xf - 1) && yn == (yf - 1)))
 								{
-									if (board_arr[yn][xn]->get_color() == "black")
-									{
-										cout << "you can't kill your figure." << endl;
-									}
-								}
-								if (yf == yn)
-								{
-									if ((xn == xf - 1) && xn > xf)
+									if (board_arr[yn][xn] == nullptr)
 									{
 										board_arr[yn][xn] = board_arr[yf][xf];
 										board_arr[yf][xf] = nullptr;
 										player = WHITE;
-										press_to_continue();
-									}
-									else if ((xn == xf + 1) && xf < xn)
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
+										printf("Forward.\n");
 										press_to_continue();
 									}
 									else
 									{
-										cout << "error." << endl;
+										if (board_arr[yn][xn]->get_color() == "black")
+										{
+											printf("Err: You can't kill your figures.\n");
+											press_to_continue();
+										}
+										else
+										{
+											if (board_arr[yn][xn]->get_name() == "w_K")
+											{
+												game_result = true;
+												break;
+											}
+											else
+											{
+												board_arr[yn][xn] = board_arr[yf][xf];
+												board_arr[yf][xf] = nullptr;
+												player = WHITE;
+												printf("You kill white figure.\n");
+												press_to_continue();
+											}
+										}
 									}
 								}
-								else if (xf == xn)
-								{
-									if ((yn == yf - 1) && yf > yn)
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										press_to_continue();
-									}
-									else if ((yn == yf - 1) && yf > yn)
-									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										press_to_continue();
-									}
-									else
-									{
-										cout << "error." << endl;
-									}
-								}
-								else if (xn == (xf + 1) && yn == (yf + 1))
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = WHITE;
-									press_to_continue();
-								}
-								else if (xn == (xf + 1) && yn == (yf - 1))
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = WHITE;
-									press_to_continue();
-								}
-								else if (xn == (xf - 1) && yn == (yf + 1))
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = WHITE;
-									press_to_continue();
-								}
-								else if (xn == (xf - 1) && yn == (yf - 1))
-								{
-									board_arr[yn][xn] = board_arr[yf][xf];
-									board_arr[yf][xf] = nullptr;
-									player = WHITE;
-									press_to_continue();
-								}
-								else
-								{
-									cout << "error." << endl;
 								}
 							}
 							else
 							{
-								cout << "Err: BLACK FIGURE CHOOSE SOLUTION." << endl;
+								printf("Err: Your choose is wrong (nullptr).\n");
 								press_to_continue();
 							}
 						}
@@ -2839,6 +2384,37 @@ int main()
 
 					if (game_result == true)
 					{
+						board_arr[0][0] = &b_r1;board_arr[0][1] = &b_h1;board_arr[0][2] = &b_e1;board_arr[0][3] = &b_Q;board_arr[0][4] = &b_K;board_arr[0][5] = &b_e2;board_arr[0][6] = &b_h2;board_arr[0][7] = &b_r2;
+						board_arr[1][0] = &b_p1;board_arr[1][1] = &b_p2;board_arr[1][2] = &b_p3;board_arr[1][3] = &b_p4;board_arr[1][4] = &b_p5;board_arr[1][5] = &b_p6;board_arr[1][6] = &b_p7;board_arr[1][7] = &b_p8;
+						board_arr[2][0] = nullptr;board_arr[2][1] = nullptr;board_arr[2][2] = nullptr;board_arr[2][3] = nullptr;board_arr[2][4] = nullptr;board_arr[2][5] = nullptr;board_arr[2][6] = nullptr;board_arr[2][7] = nullptr;
+						board_arr[3][0] = nullptr;board_arr[3][1] = nullptr;board_arr[3][2] = nullptr;board_arr[3][3] = nullptr;board_arr[3][4] = nullptr;board_arr[3][5] = nullptr;board_arr[3][6] = nullptr;board_arr[3][7] = nullptr;
+						board_arr[4][0] = nullptr;board_arr[4][1] = nullptr;board_arr[4][2] = nullptr;board_arr[4][3] = nullptr;board_arr[4][4] = nullptr;board_arr[4][5] = nullptr;board_arr[4][6] = nullptr;board_arr[4][7] = nullptr;
+						board_arr[5][0] = nullptr;board_arr[5][1] = nullptr;board_arr[5][2] = nullptr;board_arr[5][3] = nullptr;board_arr[5][4] = nullptr;board_arr[5][5] = nullptr;board_arr[5][6] = nullptr;board_arr[5][7] = nullptr;
+						board_arr[6][0] = &w_p1;board_arr[6][1] = &w_p2;board_arr[6][2] = &w_p3;board_arr[6][3] = &w_p4;board_arr[6][4] = &w_p5;board_arr[6][5] = &w_p6;board_arr[6][6] = &w_p7;board_arr[6][7] = &w_p8;
+						board_arr[7][0] = &w_r1;board_arr[7][1] = &w_h1;board_arr[7][2] = &w_e1;board_arr[7][3] = &w_Q;board_arr[7][4] = &w_K;board_arr[7][5] = &w_e2;board_arr[7][6] = &w_h2;board_arr[7][7] = &w_r2;
+
+						board_arr[6][0]->set_first_action(false);
+						board_arr[6][1]->set_first_action(false);
+						board_arr[6][2]->set_first_action(false);
+						board_arr[6][3]->set_first_action(false);
+						board_arr[6][4]->set_first_action(false);
+						board_arr[6][5]->set_first_action(false);
+						board_arr[6][6]->set_first_action(false);
+						board_arr[6][7]->set_first_action(false);
+						board_arr[1][0]->set_first_action(false);
+						board_arr[1][1]->set_first_action(false);
+						board_arr[1][2]->set_first_action(false);
+						board_arr[1][3]->set_first_action(false);
+						board_arr[1][4]->set_first_action(false);
+						board_arr[1][5]->set_first_action(false);
+						board_arr[1][6]->set_first_action(false);
+						board_arr[1][7]->set_first_action(false);
+
+						board_arr[7][4]->set_first_action(false);
+						board_arr[0][4]->set_first_action(false);
+
+						rook_res = true;
+
 						clear();
 						loading();
 						clear();
@@ -2847,6 +2423,37 @@ int main()
 					}
 					else if (game_result == false)
 					{
+						board_arr[0][0] = &b_r1; board_arr[0][1] = &b_h1; board_arr[0][2] = &b_e1; board_arr[0][3] = &b_Q; board_arr[0][4] = &b_K; board_arr[0][5] = &b_e2; board_arr[0][6] = &b_h2; board_arr[0][7] = &b_r2;
+						board_arr[1][0] = &b_p1; board_arr[1][1] = &b_p2; board_arr[1][2] = &b_p3; board_arr[1][3] = &b_p4; board_arr[1][4] = &b_p5; board_arr[1][5] = &b_p6; board_arr[1][6] = &b_p7; board_arr[1][7] = &b_p8;
+						board_arr[2][0] = nullptr; board_arr[2][1] = nullptr; board_arr[2][2] = nullptr; board_arr[2][3] = nullptr; board_arr[2][4] = nullptr; board_arr[2][5] = nullptr; board_arr[2][6] = nullptr; board_arr[2][7] = nullptr;
+						board_arr[3][0] = nullptr; board_arr[3][1] = nullptr; board_arr[3][2] = nullptr; board_arr[3][3] = nullptr; board_arr[3][4] = nullptr; board_arr[3][5] = nullptr; board_arr[3][6] = nullptr; board_arr[3][7] = nullptr;
+						board_arr[4][0] = nullptr; board_arr[4][1] = nullptr; board_arr[4][2] = nullptr; board_arr[4][3] = nullptr; board_arr[4][4] = nullptr; board_arr[4][5] = nullptr; board_arr[4][6] = nullptr; board_arr[4][7] = nullptr;
+						board_arr[5][0] = nullptr; board_arr[5][1] = nullptr; board_arr[5][2] = nullptr; board_arr[5][3] = nullptr; board_arr[5][4] = nullptr; board_arr[5][5] = nullptr; board_arr[5][6] = nullptr; board_arr[5][7] = nullptr;
+						board_arr[6][0] = &w_p1; board_arr[6][1] = &w_p2; board_arr[6][2] = &w_p3; board_arr[6][3] = &w_p4; board_arr[6][4] = &w_p5; board_arr[6][5] = &w_p6; board_arr[6][6] = &w_p7; board_arr[6][7] = &w_p8;
+						board_arr[7][0] = &w_r1; board_arr[7][1] = &w_h1; board_arr[7][2] = &w_e1; board_arr[7][3] = &w_Q; board_arr[7][4] = &w_K; board_arr[7][5] = &w_e2; board_arr[7][6] = &w_h2; board_arr[7][7] = &w_r2;
+
+						board_arr[6][0]->set_first_action(false);
+						board_arr[6][1]->set_first_action(false);
+						board_arr[6][2]->set_first_action(false);
+						board_arr[6][3]->set_first_action(false);
+						board_arr[6][4]->set_first_action(false);
+						board_arr[6][5]->set_first_action(false);
+						board_arr[6][6]->set_first_action(false);
+						board_arr[6][7]->set_first_action(false);
+						board_arr[1][0]->set_first_action(false);
+						board_arr[1][1]->set_first_action(false);
+						board_arr[1][2]->set_first_action(false);
+						board_arr[1][3]->set_first_action(false);
+						board_arr[1][4]->set_first_action(false);
+						board_arr[1][5]->set_first_action(false);
+						board_arr[1][6]->set_first_action(false);
+						board_arr[1][7]->set_first_action(false);
+
+						board_arr[7][4]->set_first_action(false);
+						board_arr[0][4]->set_first_action(false);
+
+						rook_res = true;
+
 						clear();
 						loading();
 						clear();
@@ -2857,7 +2464,6 @@ int main()
 				press_to_continue();
 				break;
 			case 3:
-				// In process.
 				break;
 			case 4:
 				clear();

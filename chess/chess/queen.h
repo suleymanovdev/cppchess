@@ -5,9 +5,7 @@ using namespace std;
 class Queen : public Figure 
 {
 public:
-	void info()
-	{
-		cout << "NAME: " << get_name() << endl;
-		cout << "WEIGHT: " << get_weight() << endl;
-	}
+	void set_first_action(bool first_action) override {}
+	bool get_first_action() override { return false; }
+	void info()	{ cout << "NAME: " << get_name() << endl; cout << "WEIGHT: " << get_weight() << endl; }
 };

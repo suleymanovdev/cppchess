@@ -141,6 +141,9 @@
     <ClInclude Include="rook.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="ctrv.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
