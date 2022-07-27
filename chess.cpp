@@ -1830,7 +1830,7 @@ int main()
 										rook_res = true;
 										if (yf > yn)
 										{
-											for (int i = yf - 1; i > yn; i--)
+											for (int i = yf; i > yn; i--)
 											{
 												if (board_arr[i][xn] != nullptr)
 												{
@@ -1870,7 +1870,7 @@ int main()
 										}
 										else if (yf < yn)
 										{
-											for (int i = yf - 1; i > yn; i++)
+											for (int i = yf; i < yn; i++)
 											{
 												if (board_arr[i][xn] != nullptr)
 												{
@@ -2214,7 +2214,7 @@ int main()
 										rook_res = true;
 										if (yf > yn)
 										{
-											for (int i = yf - 1; i > yn; i--)
+											for (int i = yf; i > yn; i--)
 											{
 												if (board_arr[i][xn] != nullptr)
 												{
@@ -2254,7 +2254,7 @@ int main()
 										}
 										else if (yf < yn)
 										{
-											for (int i = yf - 1; i > yn; i++)
+											for (int i = yf; i < yn; i++)
 											{
 												if (board_arr[i][xn] != nullptr)
 												{
