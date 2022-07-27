@@ -197,7 +197,7 @@ int main()
 					press_to_continue();
 					break;
 				}
-		
+
 				break;
 			case 2:
 				clear();
@@ -381,7 +381,7 @@ int main()
 							xf = 0;
 							xf = lti(coor, 0);
 							yf = ltl(coor, 1);
-							
+
 							/*
 										WHITE
 							*/
@@ -811,19 +811,22 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "b_K")
+													if (board_arr[yn][yn]->get_color() == "black")
 													{
-														user.set_level(user.get_level() + 10);
-														game_result = true;
-														break;
-													}
-													else
-													{
-														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = BLACK;
-														printf("You kill black figure.\n");
+														if (board_arr[yn][xn]->get_name() == "b_K")
+														{
+															user.set_level(user.get_level() + 10);
+															game_result = true;
+															break;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+															printf("You kill black figure.\n");
+														}
 													}
 												}
 												else
@@ -850,19 +853,22 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "b_K")
+													if (board_arr[yn][yn]->get_color() == "black")
 													{
-														user.set_level(user.get_level() + 10);
-														game_result = true;
-														break;
-													}
-													else
-													{
-														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = BLACK;
-														printf("You kill black figure.\n");
+														if (board_arr[yn][xn]->get_name() == "b_K")
+														{
+															user.set_level(user.get_level() + 10);
+															game_result = true;
+															break;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+															printf("You kill black figure.\n");
+														}
 													}
 												}
 												else
@@ -893,19 +899,22 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "b_K")
+													if (board_arr[yn][yn]->get_color() == "black")
 													{
-														user.set_level(user.get_level() + 10);
-														game_result = true;
-														break;
-													}
-													else
-													{
-														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = BLACK;
-														printf("You kill black figure.\n");
+														if (board_arr[yn][xn]->get_name() == "b_K")
+														{
+															user.set_level(user.get_level() + 10);
+															game_result = true;
+															break;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+															printf("You kill black figure.\n");
+														}
 													}
 												}
 												else
@@ -932,19 +941,22 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "b_K")
+													if (board_arr[yn][yn]->get_color() == "black")
 													{
-														user.set_level(user.get_level() + 10);
-														game_result = true;
-														break;
-													}
-													else
-													{
-														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = BLACK;
-														printf("You kill black figure.\n");
+														if (board_arr[yn][xn]->get_name() == "b_K")
+														{
+															user.set_level(user.get_level() + 10);
+															game_result = true;
+															break;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+															printf("You kill black figure.\n");
+														}
 													}
 												}
 												else
@@ -1156,6 +1168,7 @@ int main()
 													board_arr[yf][xf] = nullptr;
 													player = BLACK;
 													printf("You kill black figure.\n");
+													press_to_continue();
 												}
 											}
 											else
@@ -1164,10 +1177,11 @@ int main()
 												board_arr[yf][xf] = nullptr;
 												player = BLACK;
 												printf("Forward.\n");
+												press_to_continue();
 											}
 										}
 									}
-									else if (xf == xn)
+									if (xf == xn)
 									{
 										rook_res = true;
 										if (yf > yn)
@@ -1176,31 +1190,31 @@ int main()
 											{
 												if (board_arr[i][xn] != nullptr)
 												{
-													if (board_arr[i][xn]->get_color() == "white")
-													{
-														printf("You can't kill your figures.\n");
-														rook_res = false;
-														break;
-													}
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
+													break;
 												}
 											}
 											if (rook_res == true)
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "b_K")
+													if (board_arr[yn][yn]->get_color() == "black")
 													{
-														user.set_level(user.get_level() + 10);
-														game_result = true;
-														break;
-													}
-													else
-													{
-														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = BLACK;
-														printf("You kill black figure.\n");
+														if (board_arr[yn][xn]->get_name() == "b_K")
+														{
+															user.set_level(user.get_level() + 10);
+															game_result = true;
+															break;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+															printf("You kill black figure.\n");
+														}
 													}
 												}
 												else
@@ -1218,31 +1232,31 @@ int main()
 											{
 												if (board_arr[i][xn] != nullptr)
 												{
-													if (board_arr[i][xn]->get_color() == "white")
-													{
-														printf("You can't kill your figures.\n");
-														rook_res = false;
-														break;
-													}
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
+													break;
 												}
 											}
 											if (rook_res == true)
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "b_K")
+													if (board_arr[yn][yn]->get_color() == "black")
 													{
-														user.set_level(user.get_level() + 10);
-														game_result = true;
-														break;
-													}
-													else
-													{
-														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = BLACK;
-														printf("You kill black figure.\n");
+														if (board_arr[yn][xn]->get_name() == "b_K")
+														{
+															user.set_level(user.get_level() + 10);
+															game_result = true;
+															break;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+															printf("You kill black figure.\n");
+														}
 													}
 												}
 												else
@@ -1264,31 +1278,31 @@ int main()
 											{
 												if (board_arr[yn][i] != nullptr)
 												{
-													if (board_arr[yn][i]->get_color() == "white")
-													{
-														printf("You can't kill your figures.\n");
-														rook_res = false;
-														break;
-													}
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
+													break;
 												}
 											}
 											if (rook_res == true)
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "b_K")
+													if (board_arr[yn][yn]->get_color() == "black")
 													{
-														user.set_level(user.get_level() + 10);
-														game_result = true;
-														break;
-													}
-													else
-													{
-														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = BLACK;
-														printf("You kill black figure.\n");
+														if (board_arr[yn][xn]->get_name() == "b_K")
+														{
+															user.set_level(user.get_level() + 10);
+															game_result = true;
+															break;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+															printf("You kill black figure.\n");
+														}
 													}
 												}
 												else
@@ -1306,31 +1320,31 @@ int main()
 											{
 												if (board_arr[yn][i] != nullptr)
 												{
-													if (board_arr[yn][i]->get_color() == "white")
-													{
-														printf("You can't kill your figures.\n");
-														rook_res = false;
-														break;
-													}
+													printf("Err: Wrong Position.\n");
+													rook_res = false;
+													break;
 												}
 											}
 											if (rook_res == true)
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "b_K")
+													if (board_arr[yn][yn]->get_color() == "black")
 													{
-														user.set_level(user.get_level() + 10);
-														game_result = true;
-														break;
-													}
-													else
-													{
-														user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = BLACK;
-														printf("You kill black figure.\n");
+														if (board_arr[yn][xn]->get_name() == "b_K")
+														{
+															user.set_level(user.get_level() + 10);
+															game_result = true;
+															break;
+														}
+														else
+														{
+															user.set_level(user.get_level() + board_arr[yn][xn]->get_weight());
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = BLACK;
+															printf("You kill black figure.\n");
+														}
 													}
 												}
 												else
@@ -1341,6 +1355,10 @@ int main()
 													printf("Forward.\n");
 												}
 											}
+										}
+										else
+										{
+											printf("Err: Try again with another position.\n");
 										}
 									}
 								}
@@ -1411,7 +1429,7 @@ int main()
 							xf = 0;
 							xf = lti(coor, 0);
 							yf = ltl(coor, 1);
-							
+
 							/*
 										BLACK
 							*/
@@ -1825,17 +1843,20 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "w_K")
+													if (board_arr[yn][yn]->get_color() == "white")
 													{
-														game_result = false;
-														break;
-													}
-													else
-													{
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = WHITE;
-														printf("You kill white figure.\n");
+														if (board_arr[yn][xn]->get_name() == "w_K")
+														{
+															game_result = false;
+															break;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+															printf("You kill white figure.\n");
+														}
 													}
 												}
 												else
@@ -1862,17 +1883,20 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "w_K")
+													if (board_arr[yn][yn]->get_color() == "white")
 													{
-														game_result = false;
-														break;
-													}
-													else
-													{
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = WHITE;
-														printf("You kill white figure.\n");
+														if (board_arr[yn][xn]->get_name() == "w_K")
+														{
+															game_result = false;
+															break;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+															printf("You kill white figure.\n");
+														}
 													}
 												}
 												else
@@ -1903,17 +1927,20 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "w_K")
+													if (board_arr[yn][yn]->get_color() == "white")
 													{
-														game_result = false;
-														break;
-													}
-													else
-													{
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = WHITE;
-														printf("You kill white figure.\n");
+														if (board_arr[yn][xn]->get_name() == "w_K")
+														{
+															game_result = false;
+															break;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+															printf("You kill white figure.\n");
+														}
 													}
 												}
 												else
@@ -1940,17 +1967,20 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "w_K")
+													if (board_arr[yn][yn]->get_color() == "white")
 													{
-														game_result = false;
-														break;
-													}
-													else
-													{
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = WHITE;
-														printf("You kill white figure.\n");
+														if (board_arr[yn][xn]->get_name() == "w_K")
+														{
+															game_result = false;
+															break;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+															printf("You kill white figure.\n");
+														}
 													}
 												}
 												else
@@ -2008,17 +2038,20 @@ int main()
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() == "w_K")
+												if (board_arr[yn][xn]->get_color() == "white")
 												{
-													game_result = false;
-													break;
-												}
-												else
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													player = WHITE;
-													printf("You kill white figure.\n");
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
 												}
 											}
 											else
@@ -2053,17 +2086,20 @@ int main()
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() == "w_K")
+												if (board_arr[yn][xn]->get_color() == "white")
 												{
-													game_result = false;
-													break;
-												}
-												else
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													player = WHITE;
-													printf("You kill white figure.\n");
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
 												}
 											}
 											else
@@ -2098,17 +2134,20 @@ int main()
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() == "w_K")
+												if (board_arr[yn][xn]->get_color() == "white")
 												{
-													game_result = false;
-													break;
-												}
-												else
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													player = WHITE;
-													printf("You kill white figure.\n");
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+													}
 												}
 											}
 											else
@@ -2143,17 +2182,21 @@ int main()
 										{
 											if (board_arr[yn][xn] != nullptr)
 											{
-												if (board_arr[yn][xn]->get_name() == "w_K")
+												if (board_arr[yn][xn]->get_color() == "white")
 												{
-													game_result = false;
-													break;
-												}
-												else
-												{
-													board_arr[yn][xn] = board_arr[yf][xf];
-													board_arr[yf][xf] = nullptr;
-													player = WHITE;
-													printf("You kill white figure.\n");
+													if (board_arr[yn][xn]->get_name() == "w_K")
+													{
+														game_result = false;
+														break;
+													}
+													else
+													{
+														board_arr[yn][xn] = board_arr[yf][xf];
+														board_arr[yf][xf] = nullptr;
+														player = WHITE;
+														printf("You kill white figure.\n");
+														press_to_continue();
+													}
 												}
 											}
 											else
@@ -2162,10 +2205,11 @@ int main()
 												board_arr[yf][xf] = nullptr;
 												player = WHITE;
 												printf("Forward.\n");
+												press_to_continue();
 											}
 										}
 									}
-									else if (xf == xn)
+									if (xf == xn)
 									{
 										rook_res = true;
 										if (yf > yn)
@@ -2183,17 +2227,20 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "w_K")
+													if (board_arr[yn][yn]->get_color() == "white")
 													{
-														game_result = false;
-														break;
-													}
-													else
-													{
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = WHITE;
-														printf("You kill white figure.\n");
+														if (board_arr[yn][xn]->get_name() == "w_K")
+														{
+															game_result = false;
+															break;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+															printf("You kill white figure.\n");
+														}
 													}
 												}
 												else
@@ -2220,17 +2267,20 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "w_K")
+													if (board_arr[yn][yn]->get_color() == "white")
 													{
-														game_result = false;
-														break;
-													}
-													else
-													{
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = WHITE;
-														printf("You kill white figure.\n");
+														if (board_arr[yn][xn]->get_name() == "w_K")
+														{
+															game_result = false;
+															break;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+															printf("You kill white figure.\n");
+														}
 													}
 												}
 												else
@@ -2261,17 +2311,20 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "w_K")
+													if (board_arr[yn][yn]->get_color() == "white")
 													{
-														game_result = false;
-														break;
-													}
-													else
-													{
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = WHITE;
-														printf("You kill white figure.\n");
+														if (board_arr[yn][xn]->get_name() == "w_K")
+														{
+															game_result = false;
+															break;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+															printf("You kill white figure.\n");
+														}
 													}
 												}
 												else
@@ -2298,17 +2351,20 @@ int main()
 											{
 												if (board_arr[yn][xn] != nullptr)
 												{
-													if (board_arr[yn][xn]->get_name() == "w_K")
+													if (board_arr[yn][yn]->get_color() == "white")
 													{
-														game_result = false;
-														break;
-													}
-													else
-													{
-														board_arr[yn][xn] = board_arr[yf][xf];
-														board_arr[yf][xf] = nullptr;
-														player = WHITE;
-														printf("You kill white figure.\n");
+														if (board_arr[yn][xn]->get_name() == "w_K")
+														{
+															game_result = false;
+															break;
+														}
+														else
+														{
+															board_arr[yn][xn] = board_arr[yf][xf];
+															board_arr[yf][xf] = nullptr;
+															player = WHITE;
+															printf("You kill white figure.\n");
+														}
 													}
 												}
 												else
@@ -2320,53 +2376,57 @@ int main()
 												}
 											}
 										}
+										else
+										{
+											printf("Err: Try again with another position.\n");
+										}
 									}
 								}
 								else if (board_arr[yf][xf]->get_name() == "b_K")
 								{
-								printf("\t\t\tchoose position [ex: e5] --> ");
-								cin >> coor[2];
-								cin >> coor[3];
-								xn = lti(coor, 2);
-								yn = ltl(coor, 3);
+									printf("\t\t\tchoose position [ex: e5] --> ");
+									cin >> coor[2];
+									cin >> coor[3];
+									xn = lti(coor, 2);
+									yn = ltl(coor, 3);
 
-								printf("RESULT:");
+									printf("RESULT:");
 
-								if ((yf == yn && xn == (xf + 1)) || (yf == yn && xn == (xf - 1)) || (xf == xn && yn == (yf + 1)) || (xf == xn && yn == (yf - 1)) || (xn == (xf + 1) && yn == (yf + 1)) || (xn == (xf + 1) && yn == (yf - 1)) || (xn == (xf - 1) && yn == (yf + 1)) || (xn == (xf - 1) && yn == (yf - 1)))
-								{
-									if (board_arr[yn][xn] == nullptr)
+									if ((yf == yn && xn == (xf + 1)) || (yf == yn && xn == (xf - 1)) || (xf == xn && yn == (yf + 1)) || (xf == xn && yn == (yf - 1)) || (xn == (xf + 1) && yn == (yf + 1)) || (xn == (xf + 1) && yn == (yf - 1)) || (xn == (xf - 1) && yn == (yf + 1)) || (xn == (xf - 1) && yn == (yf - 1)))
 									{
-										board_arr[yn][xn] = board_arr[yf][xf];
-										board_arr[yf][xf] = nullptr;
-										player = WHITE;
-										printf("Forward.\n");
-										press_to_continue();
-									}
-									else
-									{
-										if (board_arr[yn][xn]->get_color() == "black")
+										if (board_arr[yn][xn] == nullptr)
 										{
-											printf("Err: You can't kill your figures.\n");
+											board_arr[yn][xn] = board_arr[yf][xf];
+											board_arr[yf][xf] = nullptr;
+											player = WHITE;
+											printf("Forward.\n");
 											press_to_continue();
 										}
 										else
 										{
-											if (board_arr[yn][xn]->get_name() == "w_K")
+											if (board_arr[yn][xn]->get_color() == "black")
 											{
-												game_result = true;
-												break;
+												printf("Err: You can't kill your figures.\n");
+												press_to_continue();
 											}
 											else
 											{
-												board_arr[yn][xn] = board_arr[yf][xf];
-												board_arr[yf][xf] = nullptr;
-												player = WHITE;
-												printf("You kill white figure.\n");
-												press_to_continue();
+												if (board_arr[yn][xn]->get_name() == "w_K")
+												{
+													game_result = true;
+													break;
+												}
+												else
+												{
+													board_arr[yn][xn] = board_arr[yf][xf];
+													board_arr[yf][xf] = nullptr;
+													player = WHITE;
+													printf("You kill white figure.\n");
+													press_to_continue();
+												}
 											}
 										}
 									}
-								}
 								}
 							}
 							else
@@ -2384,14 +2444,14 @@ int main()
 
 					if (game_result == true)
 					{
-						board_arr[0][0] = &b_r1;board_arr[0][1] = &b_h1;board_arr[0][2] = &b_e1;board_arr[0][3] = &b_Q;board_arr[0][4] = &b_K;board_arr[0][5] = &b_e2;board_arr[0][6] = &b_h2;board_arr[0][7] = &b_r2;
-						board_arr[1][0] = &b_p1;board_arr[1][1] = &b_p2;board_arr[1][2] = &b_p3;board_arr[1][3] = &b_p4;board_arr[1][4] = &b_p5;board_arr[1][5] = &b_p6;board_arr[1][6] = &b_p7;board_arr[1][7] = &b_p8;
-						board_arr[2][0] = nullptr;board_arr[2][1] = nullptr;board_arr[2][2] = nullptr;board_arr[2][3] = nullptr;board_arr[2][4] = nullptr;board_arr[2][5] = nullptr;board_arr[2][6] = nullptr;board_arr[2][7] = nullptr;
-						board_arr[3][0] = nullptr;board_arr[3][1] = nullptr;board_arr[3][2] = nullptr;board_arr[3][3] = nullptr;board_arr[3][4] = nullptr;board_arr[3][5] = nullptr;board_arr[3][6] = nullptr;board_arr[3][7] = nullptr;
-						board_arr[4][0] = nullptr;board_arr[4][1] = nullptr;board_arr[4][2] = nullptr;board_arr[4][3] = nullptr;board_arr[4][4] = nullptr;board_arr[4][5] = nullptr;board_arr[4][6] = nullptr;board_arr[4][7] = nullptr;
-						board_arr[5][0] = nullptr;board_arr[5][1] = nullptr;board_arr[5][2] = nullptr;board_arr[5][3] = nullptr;board_arr[5][4] = nullptr;board_arr[5][5] = nullptr;board_arr[5][6] = nullptr;board_arr[5][7] = nullptr;
-						board_arr[6][0] = &w_p1;board_arr[6][1] = &w_p2;board_arr[6][2] = &w_p3;board_arr[6][3] = &w_p4;board_arr[6][4] = &w_p5;board_arr[6][5] = &w_p6;board_arr[6][6] = &w_p7;board_arr[6][7] = &w_p8;
-						board_arr[7][0] = &w_r1;board_arr[7][1] = &w_h1;board_arr[7][2] = &w_e1;board_arr[7][3] = &w_Q;board_arr[7][4] = &w_K;board_arr[7][5] = &w_e2;board_arr[7][6] = &w_h2;board_arr[7][7] = &w_r2;
+						board_arr[0][0] = &b_r1; board_arr[0][1] = &b_h1; board_arr[0][2] = &b_e1; board_arr[0][3] = &b_Q; board_arr[0][4] = &b_K; board_arr[0][5] = &b_e2; board_arr[0][6] = &b_h2; board_arr[0][7] = &b_r2;
+						board_arr[1][0] = &b_p1; board_arr[1][1] = &b_p2; board_arr[1][2] = &b_p3; board_arr[1][3] = &b_p4; board_arr[1][4] = &b_p5; board_arr[1][5] = &b_p6; board_arr[1][6] = &b_p7; board_arr[1][7] = &b_p8;
+						board_arr[2][0] = nullptr; board_arr[2][1] = nullptr; board_arr[2][2] = nullptr; board_arr[2][3] = nullptr; board_arr[2][4] = nullptr; board_arr[2][5] = nullptr; board_arr[2][6] = nullptr; board_arr[2][7] = nullptr;
+						board_arr[3][0] = nullptr; board_arr[3][1] = nullptr; board_arr[3][2] = nullptr; board_arr[3][3] = nullptr; board_arr[3][4] = nullptr; board_arr[3][5] = nullptr; board_arr[3][6] = nullptr; board_arr[3][7] = nullptr;
+						board_arr[4][0] = nullptr; board_arr[4][1] = nullptr; board_arr[4][2] = nullptr; board_arr[4][3] = nullptr; board_arr[4][4] = nullptr; board_arr[4][5] = nullptr; board_arr[4][6] = nullptr; board_arr[4][7] = nullptr;
+						board_arr[5][0] = nullptr; board_arr[5][1] = nullptr; board_arr[5][2] = nullptr; board_arr[5][3] = nullptr; board_arr[5][4] = nullptr; board_arr[5][5] = nullptr; board_arr[5][6] = nullptr; board_arr[5][7] = nullptr;
+						board_arr[6][0] = &w_p1; board_arr[6][1] = &w_p2; board_arr[6][2] = &w_p3; board_arr[6][3] = &w_p4; board_arr[6][4] = &w_p5; board_arr[6][5] = &w_p6; board_arr[6][6] = &w_p7; board_arr[6][7] = &w_p8;
+						board_arr[7][0] = &w_r1; board_arr[7][1] = &w_h1; board_arr[7][2] = &w_e1; board_arr[7][3] = &w_Q; board_arr[7][4] = &w_K; board_arr[7][5] = &w_e2; board_arr[7][6] = &w_h2; board_arr[7][7] = &w_r2;
 
 						board_arr[6][0]->set_first_action(false);
 						board_arr[6][1]->set_first_action(false);
