@@ -1,5 +1,4 @@
 # cppchess
----
 
 ![img](https://github.com/suleymanovdev/cppchess/blob/main/img/img.jpg?raw=true)
 
