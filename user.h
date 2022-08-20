@@ -11,65 +11,68 @@ enum Play
 
 class User
 {
-    string username; 
-    string password;
-    int level;
-	int id;
-    bool regbool;
+    string USERNAME; 
+    string PASSWORD;
+    int LEVEL;
+	int ID;
+    bool REGBOOL;
 public:
+	string SYSTEM; // User (Player's) Current Operation System.
 	User()
 	{
-        regbool = false;
-		level = 0;
-		id = 0;
+		SYSTEM = "windows";
+        REGBOOL = false;
+		LEVEL = 0;
+		ID = 0;
 	}
 
 	void set_username(string username)
 	{
-		this->username = username;
+		this->USERNAME = username;
 	}
 
 	void set_password(string password)
 	{
-		this->password = password;
+		this->PASSWORD = password;
 	}
 
 	void set_level(int level)
 	{
-		this->level = level;
+		this->LEVEL = level;
 	}
 
     void set_regbool(bool regbool)
     {
-        this->regbool = regbool;
+        this->REGBOOL = regbool;
     }
 
 	string get_username()
 	{
-		return username;
+		return USERNAME;
 	}
 
 	string get_password()
 	{
-		return password;
+		return PASSWORD;
 	}
 
 	int get_level()
 	{
-		return level;
+		return LEVEL;
 	}
 
     bool get_regbool()
     {
-        return regbool;
+        return REGBOOL;
     }
-
+    
 	void inf0()
 	{
 		cout << "USER PROFILE (INFO)" << endl;
 		cout << endl;
-		cout << "USERNAME: " << this->username << endl;
-		cout << "PASSWORD: " << this->password << endl;
-		cout << "CHESS LEVEL: " << this->level << endl;
+		cout << "USERNAME: " << this->USERNAME << endl;
+		cout << "PASSWORD: " << this->PASSWORD << endl;
+		cout << "CHESS LEVEL: " << this->LEVEL << endl;
+		cout << "SYSTEM: " << this->SYSTEM << endl;
 	}
 };
