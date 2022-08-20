@@ -23,6 +23,8 @@ SOFTWARE.
 
 Start: July 03, 2022
 End: July 24, 2022
+
+Last Update: August 20, 2022
 */
 
 #include <iostream>
@@ -129,13 +131,16 @@ int main()
 	// MAIN CODE
 	User user;
 
+	printf("Guten Tag!\nEnter your system: ");
+	cin >> user.SYSTEM;
+
 	while (true)
 	{
 		if (user.get_regbool() == false)
 		{
-			clear();
+			clear(user.SYSTEM);
 			loading();
-			clear();
+			clear(user.SYSTEM);
 			banner();
 			welcome();
 			cout << "	choose(welcome) --> ";
@@ -143,9 +148,9 @@ int main()
 			switch (welcome_menu_choose)
 			{
 			case 1:
-				clear();
+				clear(user.SYSTEM);
 				loading();
-				clear();
+				clear(user.SYSTEM);
 				banner();
 				reg_and_login();
 				cout << "	choose(registration) --> ";
@@ -153,24 +158,23 @@ int main()
 				switch (registration_menu_choose)
 				{
 				case 1:
-					clear();
+					clear(user.SYSTEM);
 					banner();
 					cout << endl;
 					cout << "Enter username [ex: Grosmaster2000] --> ";
 					cin >> username;
-					clear();
+					clear(user.SYSTEM);
 					banner();
 					cout << endl;
 					cout << "Enter password [ex: qwerty+_chess] --> ";
 					cin >> password;
-					clear();
+					clear(user.SYSTEM);
 					banner();
 					cout << endl;
-
 					user.set_username(username);
 					user.set_password(password);
 					user.set_regbool(true);
-					clear();
+					clear(user.SYSTEM);
 					banner();
 					cout << endl;
 					user.inf0();
@@ -178,11 +182,11 @@ int main()
 					press_to_continue();
 					break;
 				case 2:
-					clear();
+					clear(user.SYSTEM);
 					user.set_username("Guest_Grassmaster");
 					user.set_password("guest123qwerty");
 					user.set_regbool(true);
-					clear();
+					clear(user.SYSTEM);
 					banner();
 					cout << endl;
 					user.inf0();
@@ -200,9 +204,9 @@ int main()
 
 				break;
 			case 2:
-				clear();
+				clear(user.SYSTEM);
 				loading();
-				clear();
+				clear(user.SYSTEM);
 				banner();
 				for (int i = 0; i < 8; i++)
 				{
@@ -236,25 +240,25 @@ int main()
 				press_to_continue();
 				break;
 			case 3:
-				clear();
+				clear(user.SYSTEM);
 				loading();
-				clear();
+				clear(user.SYSTEM);
 				banner();
 				about();
 				cout << endl;
 				press_to_continue();
 				break;
 			case 4:
-				clear();
+				clear(user.SYSTEM);
 				loading();
-				clear();
+				clear(user.SYSTEM);
 				banner();
 				license();
 				cout << endl;
 				press_to_continue();
 				break;
 			case 5:
-				clear();
+				clear(user.SYSTEM);
 				cout << "Auf Wiedersehen!" << endl;
 				exit(0);
 			default:
@@ -270,9 +274,9 @@ int main()
 			string temp_password;
 			int temp_level;
 
-			clear();
+			clear(user.SYSTEM);
 			loading();
-			clear();
+			clear(user.SYSTEM);
 			banner();
 			menu();
 			cout << "	choose(menu) --> ";
@@ -280,7 +284,7 @@ int main()
 			switch (menu_choose)
 			{
 			case 1:
-				clear();
+				clear(user.SYSTEM);
 				banner();
 				profile(user);
 				cout << "	choose(profile) --> ";
@@ -288,7 +292,7 @@ int main()
 				switch (profile_menu_choose)
 				{
 				case 1:
-					clear();
+					clear(user.SYSTEM);
 					banner();
 					cout << "	enter user password --> ";
 					cin >> temp_password;
@@ -307,7 +311,7 @@ int main()
 					}
 					break;
 				case 2:
-					clear();
+					clear(user.SYSTEM);
 					banner();
 					cout << "	enter user password  --> ";
 					cin >> temp_password;
@@ -332,13 +336,13 @@ int main()
 				}
 				break;
 			case 2:
-				clear();
+				clear(user.SYSTEM);
 				loading();
 				while (true)
 				{
 					while (game)
 					{
-						clear();
+						clear(user.SYSTEM);
 						cout << "WHITE PLAYER: " << user.get_username() << "  LEVEL: " << user.get_level() << endl << endl;
 						for (int i = 0; i < 8; i++)
 						{
@@ -371,7 +375,7 @@ int main()
 
 						if (player == WHITE)
 						{
-							printf("\n\t\WHITE: \n");
+							printf("\n\t WHITE: \n");
 							printf("\t\tchoose figure [ex: e7] --> ");
 							cin >> coor[0];
 							cin >> coor[1];
@@ -1428,7 +1432,7 @@ int main()
 						}
 						else if (player == BLACK)
 						{
-							printf("\n\t\BLACK: \n");
+							printf("\n\t BLACK: \n");
 							printf("\t\tchoose figure [ex: e2] --> ");
 							cin >> coor[0];
 							cin >> coor[1];
@@ -2498,9 +2502,9 @@ int main()
 
 						rook_res = true;
 
-						clear();
+						clear(user.SYSTEM);
 						loading();
-						clear();
+						clear(user.SYSTEM);
 						board_win(user);
 						break;
 					}
@@ -2537,9 +2541,9 @@ int main()
 
 						rook_res = true;
 
-						clear();
+						clear(user.SYSTEM);
 						loading();
-						clear();
+						clear(user.SYSTEM);
 						board_loss(user);
 						break;
 					}
@@ -2549,27 +2553,27 @@ int main()
 			case 3:
 				break;
 			case 4:
-				clear();
+				clear(user.SYSTEM);
 				loading();
-				clear();
+				clear(user.SYSTEM);
 				banner();
 				about();
 				cout << endl;
 				press_to_continue();
 				break;
 			case 5:
-				clear();
+				clear(user.SYSTEM);
 				loading();
-				clear();
+				clear(user.SYSTEM);
 				banner();
 				license();
 				cout << endl;
 				press_to_continue();
 				break;
 			case 6:
-				clear();
+				clear(user.SYSTEM);
 				loading();
-				clear();
+				clear(user.SYSTEM);
 				user.set_regbool(false);
 				press_to_continue();
 				break;
