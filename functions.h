@@ -1,32 +1,37 @@
 #include <iostream>
-#include <string>
-#include <windows.h>
 using namespace std;
 
-void clear()
+void clear(string sys)
 {
-    system("cls");
+	/*
+		
+	*/
+
+	if (sys == "windows")
+	{
+		system("cls");
+	}
+	else if (sys == "linux")
+	{
+		system("clear");
+	}
+	else
+	{
+		cout << "[!] System Choosing Error. Restart program and choose one (windows or linux)." << endl;
+	}
 }
 
 void loading()
 {
-    cout << endl << endl << endl;
-    cout << "           loading: ";
-    for (int i = 0; i < 20; i++)
-    {
-        cout << char(254);
-        Sleep(50);
-    }
-    Sleep(60);
-    cout << "   Done.";
-    Sleep(400);
+    // Searching solutions for this.
+    int i = 190;
 }
 
 void press_to_continue()
 {
     cout << endl;
     cout << "Press to continue....";
-    int a;
+    string a;
     cin >> a;
 }
 
