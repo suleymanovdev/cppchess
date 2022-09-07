@@ -24,7 +24,9 @@ SOFTWARE.
 Start: July 03, 2022
 End: July 24, 2022
 
-Last Update: August 20, 2022
+August:
+	Update: 20, 2022 : Player changing.
+	Update: 25, 2022 : Text color update.
 */
 
 #include <iostream>
@@ -116,7 +118,6 @@ int main()
 	int yf = 0;
 	int xn = 0;
 	int yn = 0;
-	// int pawn_ = 0;
 	string password;
 	string temp_password;
 	string username;
@@ -128,10 +129,30 @@ int main()
 	bool elep_res = true;
 	Play player = WHITE;
 
+	// TERMINAL COLORS
+	string dft_text = "\033[0m";
+	string bgd_dft = "\033[37;0m";
+	string bgd_black = "\033[30;44m";
+	string bgd_red = "\033[31;44m";
+	string bgd_green = "\033[32;44m";
+	string bgd_brown = "\033[33;44m";
+	string bgd_magenta = "\033[35;44m";
+	string bgd_cyan = "\033[36;44m";
+	string bgd_lightgray = "\033[37;44m";
+	string black = "\033[30m";
+	string red = "\033[31m";
+	string green = "\033[32m";
+	string brown = "\033[33m";
+	string blue = "\033[34m";
+	string magenta = "\033[35m";
+	string cyan = "\033[36m";
+	string lightgray = "\033[37m";
+
 	// MAIN CODE
 	User user;
+	Statistics stats;
 
-	printf("Guten Tag!\nEnter your system: ");
+	cout << blue << "Guten Tag!\n" << green << "Enter your system: " << dft_text;
 	cin >> user.SYSTEM;
 
 	while (true)
@@ -141,9 +162,11 @@ int main()
 			clear(user.SYSTEM);
 			loading();
 			clear(user.SYSTEM);
+			cout << cyan;
 			banner();
+			cout << dft_text;
 			welcome();
-			cout << "	choose(welcome) --> ";
+			cout << brown << "	   choose(welcome) --> " << red;
 			cin >> welcome_menu_choose;
 			switch (welcome_menu_choose)
 			{
@@ -151,19 +174,22 @@ int main()
 				clear(user.SYSTEM);
 				loading();
 				clear(user.SYSTEM);
+				cout << cyan;
 				banner();
+				cout << dft_text;
 				reg_and_login();
-				cout << "	choose(registration) --> ";
+				cout << brown << "       choose(registration) --> " << red;
 				cin >> registration_menu_choose;
+				cout << dft_text;
 				switch (registration_menu_choose)
 				{
 				case 1:
 					clear(user.SYSTEM);
+					cout << green;
 					banner();
 					cout << endl;
-					cout << "Enter username [ex: Grosmaster2000] --> ";
+					cout << red << "Enter username [ex: Grosmaster2000] --> " << dft_text;
 					cin >> username;
-					clear(user.SYSTEM);
 					banner();
 					cout << endl;
 					cout << "Enter password [ex: qwerty+_chess] --> ";
@@ -183,8 +209,8 @@ int main()
 					break;
 				case 2:
 					clear(user.SYSTEM);
-					user.set_username("Guest_Grassmaster");
-					user.set_password("guest123qwerty");
+					user.set_username("guest_player");
+					user.set_password("123qwerty");
 					user.set_regbool(true);
 					clear(user.SYSTEM);
 					banner();
@@ -210,12 +236,13 @@ int main()
 				banner();
 				for (int i = 0; i < 8; i++)
 				{
+					cout << dft_text;
 					cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
 					for (int j = 0; j < 8; j++)
 					{
 						if (j == 0)
 						{
-							cout << i + 1 << " ";
+							cout << cyan << i + 1 << " " << dft_text;
 						}
 						if (board_arr[i][j] == nullptr)
 						{
@@ -399,7 +426,7 @@ int main()
 									xn = lti(coor, 2);
 									yn = ltl(coor, 3);
 
-									printf("RESULT:");
+									printf("RESULT");
 
 									if (board_arr[yf][xf]->get_first_action() == false)
 									{
@@ -1456,7 +1483,7 @@ int main()
 									xn = lti(coor, 2);
 									yn = ltl(coor, 3);
 
-									printf("RESULT:");
+									printf("RESULT");
 
 									if (board_arr[yf][xf]->get_first_action() == false)
 									{
@@ -2471,6 +2498,8 @@ int main()
 
 					if (game_result == true)
 					{
+						stats.WINS += 1;
+
 						board_arr[0][0] = &b_r1; board_arr[0][1] = &b_h1; board_arr[0][2] = &b_e1; board_arr[0][3] = &b_Q; board_arr[0][4] = &b_K; board_arr[0][5] = &b_e2; board_arr[0][6] = &b_h2; board_arr[0][7] = &b_r2;
 						board_arr[1][0] = &b_p1; board_arr[1][1] = &b_p2; board_arr[1][2] = &b_p3; board_arr[1][3] = &b_p4; board_arr[1][4] = &b_p5; board_arr[1][5] = &b_p6; board_arr[1][6] = &b_p7; board_arr[1][7] = &b_p8;
 						board_arr[2][0] = nullptr; board_arr[2][1] = nullptr; board_arr[2][2] = nullptr; board_arr[2][3] = nullptr; board_arr[2][4] = nullptr; board_arr[2][5] = nullptr; board_arr[2][6] = nullptr; board_arr[2][7] = nullptr;
@@ -2510,6 +2539,8 @@ int main()
 					}
 					else if (game_result == false)
 					{
+						stats.LOST += 1;
+
 						board_arr[0][0] = &b_r1; board_arr[0][1] = &b_h1; board_arr[0][2] = &b_e1; board_arr[0][3] = &b_Q; board_arr[0][4] = &b_K; board_arr[0][5] = &b_e2; board_arr[0][6] = &b_h2; board_arr[0][7] = &b_r2;
 						board_arr[1][0] = &b_p1; board_arr[1][1] = &b_p2; board_arr[1][2] = &b_p3; board_arr[1][3] = &b_p4; board_arr[1][4] = &b_p5; board_arr[1][5] = &b_p6; board_arr[1][6] = &b_p7; board_arr[1][7] = &b_p8;
 						board_arr[2][0] = nullptr; board_arr[2][1] = nullptr; board_arr[2][2] = nullptr; board_arr[2][3] = nullptr; board_arr[2][4] = nullptr; board_arr[2][5] = nullptr; board_arr[2][6] = nullptr; board_arr[2][7] = nullptr;
@@ -2577,6 +2608,13 @@ int main()
 				user.set_regbool(false);
 				press_to_continue();
 				break;
+			case 7:
+				clear(user.SYSTEM);
+				loading();
+				clear(user.SYSTEM);
+				stats.sh0w();
+				press_to_continue();
+				break;
 			default:
 				cout << "Err: Menu." << endl;
 				error();
@@ -2585,6 +2623,6 @@ int main()
 			}
 		}
 	}
-
+	
 	return 0;
 }

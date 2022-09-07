@@ -10,7 +10,7 @@ void banner()
     cout << "	 / /  __/ /___/ /_   / /   / __ // _ // ___/ ___/				" << endl;
     cout << "	/ /__/_  __/_  __/  / /___/ / / /  __(__  |__  ) 				" << endl;
     cout << "	/____//_/   /_/     /____/_/ /_//___/____/____/  				" << endl;
-    cout << "                                            by suleymanovdev.  	" << endl;
+    cout << "                                            by suleymanovdev.  			" << endl;
 }
 
 void welcome()
@@ -46,7 +46,7 @@ void menu()
     cout << endl;
 	cout << "		[6]Log Out.										" << endl; // user.set_regbool(false);
 	cout << endl;
-	cout << "		[7]Exit.										" << endl; // exit(0);
+	cout << "		[7]Statics.										" << endl;
 }
 
 void profile(User& user)

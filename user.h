@@ -76,3 +76,39 @@ public:
 		cout << "SYSTEM: " << this->SYSTEM << endl;
 	}
 };
+
+class SecondUser
+{
+public:
+	string USERNAME; 
+    int LEVEL;
+	SecondUser()
+	{
+		USERNAME = "Second User";
+		LEVEL = 0;
+	}
+};
+
+struct Statistics
+{
+	int WINS = 0;
+	int LOST = 0;
+
+	void sh0w()
+	{
+		// WINS Stats.
+		cout << "WIN GAMES: ";
+		for (int i = 0; i < WINS; i++)
+		{
+			cout << "[+]";
+		}
+		cout << endl;
+		// LOST Stats.
+		cout << "LOST GAMES: ";
+		for (int i = 0; i < LOST; i++)
+		{
+			cout << "[-]";
+		}
+		cout << endl;
+	}
+};
