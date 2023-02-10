@@ -1,5 +1,5 @@
 ### C++ Chess (Logical)
-### Hey! This is my first largest C++ project with using OOP.
+Hey! This is my first largest C++ project with using OOP.
 This project about mathematics in programming by using C++ language 
 and writing chess program my this princips.
 
