@@ -20,30 +20,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-Start: July 03, 2022
-End: July 24, 2022
-
-August:
-	Update: 20, 2022 : Player changing.
-	Update: 25, 2022 : Text color update.
 */
 
 #include <iostream>
 #include <string>
 #include <stdio.h>
-// ADDITIONAL FILES
 #include "menus.h"
 #include "functions.h"
 #include "user.h"
-#include "figure.h"
-// FIGURES
-#include "pawn.h"
-#include "horse.h"
-#include "elephant.h"
-#include "rook.h"
-#include "queen.h"
-#include "king.h"
+#include "figures/figure.h"
 using namespace std;
 
 int main()

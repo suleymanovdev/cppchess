@@ -30,8 +30,7 @@ void press_to_continue()
 {
     cout << endl;
     cout << "Press to continue....";
-    string a;
-    cin >> a;
+    cin.ignore();
 }
 
 int lti(char coor[], int x)
