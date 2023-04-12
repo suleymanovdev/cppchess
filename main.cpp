@@ -25,13 +25,15 @@ SOFTWARE.
 #include <iostream>
 #include <string>
 #include "game/settings.h"
-#include "game/errors.h"
-#include "game/board.h"
-#include "game/user.h"
+// #include "game/errors.h"
+// #include "game/board.h"
+// #include "game/user.h"
 using namespace std;
 
 int main()
 {
-	
+	std::cout << "\033]0;" << "C++" << "\007";
+	Settings settings;
+	settings.press_to_continue();
 	return 0;
 }

@@ -8,8 +8,4 @@ class King : public Figure
 private:
     bool _down;
 public:
-    override void info()
-    {
-        
-    }
 };
