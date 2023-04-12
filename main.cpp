@@ -24,17 +24,10 @@ SOFTWARE.
 
 #include <iostream>
 #include <string>
-// ADDITIONAL FILES
 #include "game/settings.h"
 #include "game/errors.h"
-// FIGURES
-#include "figures/figure.h"
-#include "figures/pawn.h"
-#include "figures/horse.h"
-#include "figures/elephant.h"
-#include "figures/rook.h"
-#include "figures/queen.h"
-#include "figures/king.h"
+#include "game/board.h"
+#include "game/user.h"
 using namespace std;
 
 int main()
