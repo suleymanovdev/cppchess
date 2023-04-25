@@ -22,13 +22,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <iostream>
-#include <string>
-#include <stdio.h>
-#include "menus.h"
-#include "functions.h"
-#include "user.h"
+// INCLUDES
+#include <bits/stdc++.h>
+// MAIN INCLUDES
+#include "game/menus.h"
+#include "game/functions.h"
+#include "game/user.h"
 #include "figures/figure.h"
+// FIGURE INCLUDES
+#include "figures/king.h"
+#include "figures/queen.h"
+#include "figures/rook.h"
+#include "figures/elephant.h"
+#include "figures/horse.h"
+#include "figures/pawn.h"
+
 using namespace std;
 
 int main()
@@ -94,7 +102,7 @@ int main()
 		{&w_r1, &w_h1, &w_e1, &w_Q, &w_K, &w_e2, &w_h2, &w_r2}
 	};
 
-	// DATA FOR PROGRAMM
+	// DATA FOR PROGRAM
 	int welcome_menu_choose = 0;
 	int registration_menu_choose = 0;
 	int profile_menu_choose = 0;
@@ -114,30 +122,11 @@ int main()
 	bool elep_res = true;
 	Play player = WHITE;
 
-	// TERMINAL COLORS
-	string dft_text = "\033[0m";
-	string bgd_dft = "\033[37;0m";
-	string bgd_black = "\033[30;44m";
-	string bgd_red = "\033[31;44m";
-	string bgd_green = "\033[32;44m";
-	string bgd_brown = "\033[33;44m";
-	string bgd_magenta = "\033[35;44m";
-	string bgd_cyan = "\033[36;44m";
-	string bgd_lightgray = "\033[37;44m";
-	string black = "\033[30m";
-	string red = "\033[31m";
-	string green = "\033[32m";
-	string brown = "\033[33m";
-	string blue = "\033[34m";
-	string magenta = "\033[35m";
-	string cyan = "\033[36m";
-	string lightgray = "\033[37m";
-
 	// MAIN CODE
 	User user;
 	Statistics stats;
 
-	cout << blue << "Guten Tag!\n" << green << "Enter your system: " << dft_text;
+	cout << "Guten Tag!\n" << "Enter your system: ";
 	cin >> user.SYSTEM;
 
 	while (true)
@@ -147,11 +136,9 @@ int main()
 			clear(user.SYSTEM);
 			loading();
 			clear(user.SYSTEM);
-			cout << cyan;
 			banner();
-			cout << dft_text;
 			welcome();
-			cout << brown << "	   choose(welcome) --> " << red;
+			cout << "	   choose(welcome) --> ";
 			cin >> welcome_menu_choose;
 			switch (welcome_menu_choose)
 			{
@@ -159,21 +146,17 @@ int main()
 				clear(user.SYSTEM);
 				loading();
 				clear(user.SYSTEM);
-				cout << cyan;
 				banner();
-				cout << dft_text;
 				reg_and_login();
-				cout << brown << "       choose(registration) --> " << red;
+				cout << "       choose(registration) --> ";
 				cin >> registration_menu_choose;
-				cout << dft_text;
 				switch (registration_menu_choose)
 				{
 				case 1:
 					clear(user.SYSTEM);
-					cout << green;
 					banner();
 					cout << endl;
-					cout << red << "Enter username [ex: Grosmaster2000] --> " << dft_text;
+					cout << "Enter username [ex: Grosmaster2000] --> ";
 					cin >> username;
 					banner();
 					cout << endl;
@@ -221,13 +204,12 @@ int main()
 				banner();
 				for (int i = 0; i < 8; i++)
 				{
-					cout << dft_text;
 					cout << "  +-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
 					for (int j = 0; j < 8; j++)
 					{
 						if (j == 0)
 						{
-							cout << cyan << i + 1 << " " << dft_text;
+							cout << i + 1 << " ";
 						}
 						if (board_arr[i][j] == nullptr)
 						{

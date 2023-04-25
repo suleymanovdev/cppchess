@@ -4,7 +4,7 @@ using namespace std;
 void clear(string sys)
 {
 	/*
-		Clear system with system name usage.		
+		
 	*/
 
 	if (sys == "windows")
@@ -23,26 +23,28 @@ void clear(string sys)
 
 void loading()
 {
-	// ---
+    // Searching solutions for this.
+    int i = 190;
 }
 
 void press_to_continue()
 {
     cout << endl;
     cout << "Press to continue....";
-    cin.ignore();
+    string a;
+    cin >> a;
 }
 
 int lti(char coor[], int x)
 {
-	if (coor[x] == 'a') { return 0; }
-	else if (coor[x] == 'b') { return 1; }
-	else if (coor[x] == 'c') { return 2; }
-	else if (coor[x] == 'd') { return 3; }
-	else if (coor[x] == 'e') { return 4; }
-	else if (coor[x] == 'f') { return 5; }
-	else if (coor[x] == 'g') { return 6; }
-	else if (coor[x] == 'h') { return 7; }
+	if (coor[x] == 'a') {return 0;}
+	else if (coor[x] == 'b') {return 1;}
+	else if (coor[x] == 'c') {return 2;}
+	else if (coor[x] == 'd') {return 3;}
+	else if (coor[x] == 'e') {return 4;}
+	else if (coor[x] == 'f') {return 5;}
+	else if (coor[x] == 'g') {return 6;}
+	else if (coor[x] == 'h') {return 7;}
 	else {return 0;}
 }
 
