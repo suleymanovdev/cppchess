@@ -120,6 +120,7 @@ int main()
 	char coor[4]{};
 	bool game = true;
 	bool game_result = false;
+	bool game_result_black = false;
 	bool rook_res = true;
 	bool elep_res = true;
 	Play player = WHITE;
@@ -398,6 +399,8 @@ int main()
 									printf("RESULT:");
 									board_arr[yf][xf]->move_white(board_arr, player, user, elep_res, rook_res, game_result, w_Q_temp, xf, yf, xn, yn);
 									if (game_result == true) { break; }
+									player = BLACK;
+									continue;
 								}
 							}
 							else
@@ -408,6 +411,8 @@ int main()
 						}
 						else if (player == BLACK)
 						{
+							printf("\n\t BLACK: \n");
+							printf("\t\tchoose figure [ex: b2] --> ");
 							cin >> coor[0];
 							cin >> coor[1];
 							xf = 0;
@@ -427,14 +432,14 @@ int main()
 								{
 									if (board_arr[yf][xf]->get_name() == "b_p")
 									{
-										printf("\t\t\tchoose position [ex: b2] --> ");
+										printf("\t\t\tchoose position [ex: b4] --> ");
 										cin >> coor[2];
 										cin >> coor[3];
 										xn = lti(coor, 2);
 										yn = ltl(coor, 3);
 										printf("RESULT:");
-										board_arr[yf][xf]->move_black(board_arr, player, user, elep_res, rook_res, game_result, b_Q_temp, xf, yf, xn, yn);
-										if (game_result == false) { break; }
+										board_arr[yf][xf]->move_black(board_arr, player, user, elep_res, rook_res, game_result_black, b_Q_temp, xf, yf, xn, yn);
+										if (game_result_black == true) { break; }
 									}
 								}
 							}
@@ -485,6 +490,9 @@ int main()
 						board_arr[0][4]->set_first_action(false);
 
 						rook_res = true;
+						elep_res = true;
+						game_result = false;
+						game_result_black = false;
 
 						clear(user.SYSTEM);
 						loading();
@@ -492,7 +500,7 @@ int main()
 						board_win(user);
 						break;
 					}
-					else if (game_result == false)
+					else if (game_result_black == true)
 					{
 						stats.LOST += 1;
 
@@ -526,6 +534,9 @@ int main()
 						board_arr[0][4]->set_first_action(false);
 
 						rook_res = true;
+						elep_res = true;
+						game_result = false;
+						game_result_black = false;
 
 						clear(user.SYSTEM);
 						loading();
