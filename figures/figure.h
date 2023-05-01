@@ -42,4 +42,6 @@ public:
 
     virtual void set_first_action(bool first_action) = 0;
     virtual bool get_first_action() = 0;
+    virtual void move_white(Figure *board_arr[8][8], Play &player, User &user, bool &elep_res, bool &rook_res, bool &game_result, Figure &w_Q_temp, int xf, int yf, int xn, int yn) = 0;
+    virtual void move_black(Figure *board_arr[8][8], Play &player, User &user, bool &elep_res, bool &rook_res, bool &game_result, Figure &b_Q_temp, int xf, int yf, int xn, int yn) = 0;
 };
